@@ -6,12 +6,17 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 // Load environment variables
 dotenv.config();
 
 // Create Express app
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 connectDB();
 
@@ -22,6 +27,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
