@@ -1,58 +1,195 @@
+/* Base Reset & Layout */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f9f9f9;
     margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    width: 90%;
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-  }
-  
-  .logo {
-    height: 40px;
-  }
-  
-  nav a {
-    margin-left: 20px;
-    text-decoration: none;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f6f8fa;
     color: #333;
   }
   
-  .deal-details-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  .page-wrapper {
     display: flex;
-    align-items: center;
-    gap: 30px;
+    min-height: 100vh;
   }
   
-  .brand-logo {
-    height: 100px;
+  /* Sidebar */
+  .sidebar {
+    width: 80px;
+    background: #fff;
+    padding: 20px 10px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
   }
   
-  .deal-info {
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .sidebar img {
+    width: 40px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: transform 0.2s ease, opacity 0.2s;
+  }
+  
+  .sidebar img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  
+  /* Main Content */
+  .main-content {
     flex: 1;
+    padding: 40px 30px;
   }
   
-  .create-deal-btn {
-    background-color: #222;
+  .main-content h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #111;
+  }
+  
+  /* Filters */
+  .filters {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .filters label {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .filters select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: border-color 0.2s;
+  }
+  
+  .filters select:focus {
+    border-color: #000;
+    outline: none;
+  }
+
+  .filters input[type="text"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 200px;
+    transition: border-color 0.2s;
+  }
+  
+  .filters input[type="text"]:focus {
+    border-color: #000;
+    outline: none;
+  }
+  
+  
+  /* Deal Cards Grid */
+  .deal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  
+  .deal-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .deal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
+  .deal-card img {
+    max-height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .deal-card h3 {
+    font-size: 17px;
+    margin: 5px 0;
+    font-weight: 600;
+    text-align: center;
+    color: #222;
+  }
+  
+  .deal-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 4px 0;
+    text-align: center;
+  }
+  
+  .deal-card strong {
+    color: #000;
+  }
+  
+  .deal-card button {
+    margin-top: 12px;
+    background-color: #111;
     color: #fff;
     border: none;
-    padding: 12px 18px;
-    border-radius: 6px;
-    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 8px;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .deal-card button:hover {
+    background-color: #333;
+  }
+  
+  /* Responsive for Tablets and Mobiles */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      box-shadow: none;
+      justify-content: center;
+    }
+  
+    .sidebar ul {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+  
+    .main-content {
+      padding: 20px 15px;
+    }
+  
+    .deal-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
   }
   
