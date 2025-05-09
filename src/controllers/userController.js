@@ -13,7 +13,6 @@ exports.getUserDetails = async (req, res) => {
   }
 };
 
-// 📌 UPDATE LOCATION
 exports.updateLocation = async (req, res) => {
   try {
     const { location } = req.body;
@@ -31,7 +30,7 @@ exports.updateLocation = async (req, res) => {
   }
 };
 
-// 📌 UPDATE RATING
+
 exports.updateRating = async (req, res) => {
   try {
     const { rating } = req.body;
@@ -50,7 +49,7 @@ exports.updateRating = async (req, res) => {
   }
 };
 
-// 📌 UPDATE SUCCESSFUL ORDERS & MONEY SAVED
+
 exports.updateSuccessfulOrders = async (req, res) => {
   try {
     const { discount } = req.body;
@@ -69,7 +68,7 @@ exports.updateSuccessfulOrders = async (req, res) => {
   }
 };
 
-// 📌 UPDATE FAILED ORDERS
+
 exports.updateFailedOrders = async (req, res) => {
   try {
     const userId = req.user.user_id;
