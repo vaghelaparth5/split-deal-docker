@@ -21,10 +21,23 @@
       </ul>
     </aside>
 
-    <main class="main-content">
+    <main class="main-content full-width">
       <h2>🔥 Exclusive Deals Just for You</h2>
+
+      <div class="filters">
+        <label for="brandFilter">Filter by Brand:</label>
+        <select id="brandFilter">
+          <option value="All">All Brands</option>
+          <option value="Superdry">Superdry</option>
+          <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+          <option value="Zara">Zara</option>
+          <option value="Nike">Nike</option>
+          <option value="Levi's">Levi's</option>
+        </select>
+      </div>
+
       <div class="deal-grid" id="dealGrid">
-        <!-- Injected dynamically -->
+        <!-- Injected by JS -->
       </div>
     </main>
   </div>

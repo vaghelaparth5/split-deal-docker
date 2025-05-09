@@ -37,16 +37,35 @@ const deals = [
 ];
 
 const dealGrid = document.getElementById('dealGrid');
+const brandFilter = document.getElementById('brandFilter');
 
-deals.forEach(deal => {
-  const card = document.createElement('div');
-  card.className = 'deal-card';
-  card.innerHTML = `
-    <img src="${deal.logo}" alt="${deal.brand}" />
-    <h3>${deal.title}</h3>
-    <p>${deal.location}</p>
-    <p><strong>Expiry:</strong> ${deal.expiry}</p>
-    <button>Create Deal 🚀</button>
-  `;
-  dealGrid.appendChild(card);
+function renderDeals(filteredDeals) {
+  dealGrid.innerHTML = "";
+
+  filteredDeals.forEach(deal => {
+    const card = document.createElement('div');
+    card.className = 'deal-card';
+    card.innerHTML = `
+      <img src="${deal.logo}" alt="${deal.brand}" />
+      <h3>${deal.title}</h3>
+      <p>${deal.location}</p>
+      <p><strong>Expiry:</strong> ${deal.expiry}</p>
+      <button>Create Deal 🚀</button>
+    `;
+    dealGrid.appendChild(card);
+  });
+}
+
+// Initial render
+renderDeals(deals);
+
+// Filter on dropdown change
+brandFilter.addEventListener('change', () => {
+  const selected = brandFilter.value;
+  if (selected === "All") {
+    renderDeals(deals);
+  } else {
+    const filtered = deals.filter(d => d.brand === selected);
+    renderDeals(filtered);
+  }
 });
