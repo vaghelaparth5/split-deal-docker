@@ -19,8 +19,8 @@ Frontend: Vanilla JS
 Setup
 Clone the repo
 
-git clone https://github.com/yourusername/group-buying-platform.git
-cd group-buying-platform/backend
+git clone https://github.com/vaghelaparth5/Split-Deal.git
+cd Split-Deal
 
 Install dependencies:
 npm install
