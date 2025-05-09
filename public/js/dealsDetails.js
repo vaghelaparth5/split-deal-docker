@@ -1,39 +1,68 @@
 const deals = [
   {
     brand: "Superdry",
-    logo: "/images/superdry.png",
+    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1743473069/dqp71qo4nv2a8wpmgta2.webp",
     title: "Superdry Winter Sale",
     location: "Convention Centre Pl, South Wharf",
     expiry: "April 25, 2025"
   },
   {
     brand: "Tommy Hilfiger",
-    logo: "/images/tommy.png",
+    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742821088/e5sxqakk7aumxscyrvdz.png",
     title: "Buy 2 get 2 Hoodies Free",
     location: "Convention Centre Pl, South Wharf",
     expiry: "April 30, 2025"
   },
   {
     brand: "Zara",
-    logo: "/images/zara.png",
+    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742222953/hpukw5lmrnwijhoem2hb.webp",
     title: "Zara X Week",
     location: "Melbourne Bourke Street",
     expiry: "May 3, 2025"
   },
   {
     brand: "Nike",
-    logo: "/images/nike.png",
+    logo: "https://www.svgrepo.com/show/303173/nike-3-logo.svg",
     title: "Nike Air Max 20% Off + Free Shipping",
     location: "Melbourne Central",
     expiry: "May 10, 2025"
   },
   {
     brand: "Levi's",
-    logo: "/images/levis.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/2560px-Levi%27s_logo.svg.png",
     title: "Levi's Denim Discount - 25% Off",
     location: "Bourke Street Mall",
     expiry: "May 15, 2025"
-  }
+  },
+  {
+    brand: "Levi's",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/2560px-Levi%27s_logo.svg.png",
+    title: "Levi's Denim Discount - 25% Off",
+    location: "Bourke Street Mall",
+    expiry: "May 15, 2025"
+  },
+  {
+    brand: "Nike",
+    logo: "https://www.svgrepo.com/show/303173/nike-3-logo.svg",
+    title: "Nike Air Max 20% Off + Free Shipping",
+    location: "Melbourne Central",
+    expiry: "May 10, 2025"
+  },
+  {
+    brand: "Zara",
+    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742222953/hpukw5lmrnwijhoem2hb.webp",
+    title: "Zara X Week",
+    location: "Melbourne Bourke Street",
+    expiry: "May 3, 2025"
+  },
+  {
+    brand: "Tommy Hilfiger",
+    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742821088/e5sxqakk7aumxscyrvdz.png",
+    title: "Buy 2 get 2 Hoodies Free",
+    location: "Convention Centre Pl, South Wharf",
+    expiry: "April 30, 2025"
+  },
+  
 ];
 
 const dealGrid = document.getElementById('dealGrid');
