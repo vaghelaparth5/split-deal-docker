@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SplitDeal Group Listing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="grouplisting.css">
+</head>
+<body>
+
+  <div id="sidebar">
+    <div id="subcategory-list"></div>
+    <div class="toggle-button" onclick="toggleSidebar()">☰</div>
+  </div>
+
+  <div id="content">
+    <h1>Welcome to SplitDeal</h1>
+    <div id="deal-display"></div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const subcategoryList = document.getElementById('subcategory-list');
+    const dealDisplay = document.getElementById('deal-display');
+
+    const selectedCategory = "1234567890"; // Example category ID
+
+    function toggleSidebar() {
+      sidebar.classList.toggle('collapsed');
+    }
+
+    function fetchSubCategories(categoryId) {
+      // Simulated API response
+      const dummyData = [
+        { _id: "1", name: "Electronics", logoLink: "https://via.placeholder.com/20" },
+        { _id: "2", name: "Groceries", logoLink: "" },
+        { _id: "3", name: "Fashion", logoLink: "https://via.placeholder.com/20" }
+      ];
+
+      setTimeout(() => {
+        renderSubCategories(dummyData);
+      }, 500);
+    }
+
+    function renderSubCategories(data) {
+      subcategoryList.innerHTML = '';
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'subcategory';
+        div.onclick = () => displayDeals(item.name);
+
+        const img = document.createElement('img');
+        img.src = item.logoLink || 'https://via.placeholder.com/20';
+        img.alt = item.name;
+
+        const span = document.createElement('span');
+        span.textContent = item.name;
+
+        div.appendChild(img);
+        div.appendChild(span);
+        subcategoryList.appendChild(div);
+      });
+    }
+
+    function displayDeals(categoryName) {
+      dealDisplay.innerHTML = `<p>Deals for <strong>${categoryName}</strong> will appear here.</p>`;
+    }
+
+    fetchSubCategories(selectedCategory);
+  </script>
+
+</body>
+</html>
