@@ -1,58 +1,118 @@
+/* Base */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f9f9f9;
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
   }
   
-  .container {
-    width: 90%;
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  header {
+  .page-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+    min-height: 100vh;
   }
   
-  .logo {
-    height: 40px;
-  }
-  
-  nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .deal-details-card {
+  .sidebar {
+    width: 80px;
     background: #fff;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 30px;
+    padding: 20px 10px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   }
   
-  .brand-logo {
-    height: 100px;
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
   
-  .deal-info {
+  .sidebar li {
+    margin: 15px 0;
+    text-align: center;
+  }
+  
+  .sidebar img {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+  }
+  
+  /* Main */
+  .main-content {
     flex: 1;
+    padding: 30px 20px;
   }
   
-  .create-deal-btn {
-    background-color: #222;
+  .main-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .deal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  .deal-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .deal-card img {
+    max-height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .deal-card h3 {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .deal-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .deal-card button {
+    margin-top: 10px;
+    background-color: #000;
     color: #fff;
     border: none;
-    padding: 12px 18px;
+    padding: 10px 14px;
     border-radius: 6px;
-    cursor: pointer;
     font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      box-shadow: none;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .sidebar ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+    }
+  
+    .main-content {
+      padding: 20px 10px;
+    }
   }
   
