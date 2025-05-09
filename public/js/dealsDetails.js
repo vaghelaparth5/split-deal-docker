@@ -38,9 +38,15 @@ const deals = [
 
 const dealGrid = document.getElementById('dealGrid');
 const brandFilter = document.getElementById('brandFilter');
+const searchInput = document.getElementById('searchInput');
 
 function renderDeals(filteredDeals) {
   dealGrid.innerHTML = "";
+
+  if (filteredDeals.length === 0) {
+    dealGrid.innerHTML = "<p>No deals found.</p>";
+    return;
+  }
 
   filteredDeals.forEach(deal => {
     const card = document.createElement('div');
@@ -56,16 +62,24 @@ function renderDeals(filteredDeals) {
   });
 }
 
+function applyFilters() {
+  const selectedBrand = brandFilter.value.toLowerCase();
+  const searchText = searchInput.value.toLowerCase();
+
+  const filtered = deals.filter(deal => {
+    const brandMatch = selectedBrand === "all" || deal.brand.toLowerCase() === selectedBrand;
+    const textMatch =
+      deal.brand.toLowerCase().includes(searchText) ||
+      deal.title.toLowerCase().includes(searchText);
+    return brandMatch && textMatch;
+  });
+
+  renderDeals(filtered);
+}
+
 // Initial render
 renderDeals(deals);
 
-// Filter on dropdown change
-brandFilter.addEventListener('change', () => {
-  const selected = brandFilter.value;
-  if (selected === "All") {
-    renderDeals(deals);
-  } else {
-    const filtered = deals.filter(d => d.brand === selected);
-    renderDeals(filtered);
-  }
-});
+// Event listeners
+brandFilter.addEventListener('change', applyFilters);
+searchInput.addEventListener('input', applyFilters);

@@ -82,6 +82,22 @@ body {
     border-color: #000;
     outline: none;
   }
+
+  .filters input[type="text"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 200px;
+    transition: border-color 0.2s;
+  }
+  
+  .filters input[type="text"]:focus {
+    border-color: #000;
+    outline: none;
+  }
+  
   
   /* Deal Cards Grid */
   .deal-grid {
