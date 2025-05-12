@@ -1,16 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const DealSchema = new mongoose.Schema({
-  dealName: { type: String, required: true },
-  dealDesc: { type: String },
-  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }, // Reference to the parent category
-  subCategoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'SubCategory' }, // Reference to the sub-category (optional)
-  storeName: { type: String, required: true },
-  storeLocation: { type: String },
-  totalValue: { type: Number, required: true },
-  discount: { type: Number, required: true },
-  storeLogo: { type: String }, // Link to the store logo/image
-  expiryDate: { type: Date, required: true }, // Expiry date of the deal
-}, { timestamps: true });
+  title: { type: String, required: true },
+  description: { type: String, default: "" },
+  price: { type: Number, required: true },
+  original_price: { type: Number, required: true },
+  deadline: { type: Date, required: true },
+  location: { type: String, default: "" },
+  max_participants: { type: Number, required: true },
+  current_participants: { type: Number, default: 1 },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  is_active: { type: Boolean, default: true },
+  created_at: { type: Date, default: Date.now },
+  category: { type: String, default: "" },
+  image_url: { type: String, default: "" },
+  // Ratings and feedback for deal quality
+  average_rating: { type: Number, default: 0 },
+  number_of_ratings: { type: Number, default: 0 }
+});
 
 module.exports = mongoose.model("Deal", DealSchema);
