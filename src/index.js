@@ -1,22 +1,26 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
-import connectDB from './config/db.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const connectDB = require('./config/db');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
 
 // Create Express app
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
+// Import Routes
+const authRoutes = require("./routes/authRoutes");
+// const userRoutes = require("./routes/userRoutes");
+// const categoryRoutes = require('./routes/categoryRoutes');
+// const subCategoryRoutes = require('./routes/SubCategoryRoutes');
+const dealRoutes = require('./routes/dealRoutes');
+const groupRoutes = require('./routes/groupRoutes');
 
 connectDB();
 
@@ -28,6 +32,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use("/api/auth", authRoutes);
+// app.use("/api/category", categoryRoutes);
+// app.use("/api/sub-category", subCategoryRoutes);
+// app.use("/api/user", userRoutes);
+app.use("/api/deal", dealRoutes);
+// app.use("/api/group", groupRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)

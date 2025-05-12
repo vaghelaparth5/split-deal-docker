@@ -3,7 +3,7 @@ const router = express.Router();
 const {updateGroupStatus, createGroup} = require("../controllers/groupController");
 
 
-const authMiddleware = require("../middlewares/authMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 //  Route to create a new group
 router.post("/create-group",authMiddleware, createGroup);
