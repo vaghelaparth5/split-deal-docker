@@ -32,6 +32,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+// Set Content Security Policy
+// TODO : This neds to be removed in production
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      imgSrc: ["'self'", "data:", '*'],
+    },
+  })
+);
 
 app.use("/api/auth", authRoutes);
 // app.use("/api/category", categoryRoutes);
