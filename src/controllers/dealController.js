@@ -34,3 +34,13 @@ exports.createDeal = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+// Get all deals
+exports.getDeals = async (req, res) => {
+  try {
+    const deals = await Deal.find().sort({ createdAt: -1 }); // Latest first
+    res.json({ msg: "Deals fetched successfully", deals });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
