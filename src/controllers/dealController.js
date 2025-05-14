@@ -35,8 +35,15 @@ exports.createDeal = async (req, res) => {
   }
 };
 
-
-const Deal = require("../models/Deal");
+// Get all deals
+exports.getDeals = async (req, res) => {
+  try {
+    const deals = await Deal.find().sort({ createdAt: -1 }); // Latest first
+    res.json({ msg: "Deals fetched successfully", deals });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
 
 // Manually expire all deals past their deadline
 exports.expireDeals = async (req, res) => {
