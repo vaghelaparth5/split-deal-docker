@@ -44,3 +44,22 @@ exports.getDeals = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+// Manually expire all deals past their deadline
+exports.expireDeals = async (req, res) => {
+  try {
+    const now = new Date();
+
+    const expiredDeals = await Deal.updateMany(
+      { deadline: { $lt: now }, is_active: true },
+      { is_active: false }
+    );
+
+    res.status(200).json({
+      msg: "Expired deals updated successfully",
+      modifiedCount: expiredDeals.modifiedCount
+    });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
