@@ -152,3 +152,24 @@ if (brandFilter && searchInput) {
   // Initial fetch
   fetchDeals();
 }
+
+// math.js
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = {
+  deals,
+  openModal,
+  closeModal,
+  dealForm, // Exporting elements initialized at top level
+  dealGrid,
+  brandFilter,
+  searchInput,
+  modal,
+  closeBtn,
+  renderDeals,
+  applyFilters,
+  fetchDeals,
+  add // If you keep this function
+};
