@@ -1,69 +1,107 @@
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
+const path = require('path');
 const { TextEncoder, TextDecoder } = require('util');
 
-// Add polyfills
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
-// Then proceed with your existing setup...
+let dom;
+let container;
 
-// Set up the DOM environment
-const path = require('path');
-const html = fs.readFileSync(path.join(__dirname, '../views/dealsDetails.html'), 'utf8');
+beforeEach(() => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <select id="brandFilter">
+          <option value="All">All</option>
+          <option value="Nike">Nike</option>
+        </select>
+        <input type="text" id="searchInput" />
+        <div id="dealGrid"></div>
 
-const dom = new JSDOM(html, { runScripts: 'dangerously' });
-global.document = dom.window.document;
-global.window = dom.window;
+        <div id="createDealModal" style="display:none;">
+          <input id="dealTitle" />
+          <span class="close"></span>
+        </div>
 
-// Load your JS file (this will execute your scripts)
-require('../js/dealsDetails.js');
+        <button class="create-deal-btn" data-title="Superdry Winter Sale">Open Deal</button>
+      </body>
+    </html>
+  `;
 
-describe('Deals Page Tests', () => {
-  beforeEach(() => {
-    // Reset the DOM state before each test
-    document.getElementById('dealGrid').innerHTML = '';
-    document.getElementById('brandFilter').value = 'All';
-    document.getElementById('searchInput').value = '';
+  dom = new JSDOM(html, {
+    runScripts: 'dangerously',
+    resources: 'usable',
+    url: 'http://localhost/',
   });
 
-  // --- Deal Rendering Tests ---
+  container = dom.window.document.body;
+  global.window = dom.window;
+  global.document = dom.window.document;
+
+  global.deals = [
+    { title: 'Superdry Winter Sale', brand: 'Superdry' },
+    { title: 'Nike Flash Deal', brand: 'Nike' },
+    { title: 'Adidas Discount', brand: 'Adidas' }
+  ];
+  dom.window.deals = global.deals;
+
+  const scriptContent = fs.readFileSync(path.join(__dirname, '../js/dealsDetails.js'), 'utf8');
+  const scriptEl = dom.window.document.createElement('script');
+  scriptEl.textContent = scriptContent;
+  dom.window.document.body.appendChild(scriptEl);
+
+  // Simulate DOMContentLoaded
+  const event = new dom.window.Event('DOMContentLoaded', {
+    bubbles: true,
+    cancelable: true,
+  });
+  dom.window.document.dispatchEvent(event);
+});
+
+describe('Deals Page Tests', () => {
   test('Renders all deals by default', () => {
     const dealCards = document.querySelectorAll('.deal-card');
-    expect(dealCards.length).toBe(deals.length);
+    expect(dealCards.length).toBe(global.deals.length);
   });
 
   test('Filters deals by brand (e.g., Nike)', () => {
-    document.getElementById('brandFilter').value = 'Nike';
-    document.getElementById('brandFilter').dispatchEvent(new Event('change'));
-    
-    const dealCards = document.querySelectorAll('.deal-card');
-    expect(dealCards.length).toBe(deals.filter(d => d.brand === 'Nike').length);
+    const brandFilter = document.getElementById('brandFilter');
+    brandFilter.value = 'Nike';
+    brandFilter.dispatchEvent(new dom.window.Event('change'));
+
+    const filtered = global.deals.filter((d) => d.brand === 'Nike');
+    const rendered = document.querySelectorAll('.deal-card');
+    expect(rendered.length).toBe(filtered.length);
   });
 
   test('Filters deals by search term (e.g., "Winter")', () => {
-    document.getElementById('searchInput').value = 'Winter';
-    document.getElementById('searchInput').dispatchEvent(new Event('input'));
-    
-    const dealCards = document.querySelectorAll('.deal-card');
-    expect(dealCards.length).toBe(deals.filter(d => 
+    const searchInput = document.getElementById('searchInput');
+    searchInput.value = 'Winter';
+    searchInput.dispatchEvent(new dom.window.Event('input'));
+
+    const filtered = global.deals.filter((d) =>
       d.title.includes('Winter') || d.brand.includes('Winter')
-    ).length);
+    );
+    const rendered = document.querySelectorAll('.deal-card');
+    expect(rendered.length).toBe(filtered.length);
   });
 
-  // --- Modal Tests ---
   test('Modal opens with correct prefilled data', () => {
-    const firstDealButton = document.querySelector('.create-deal-btn');
-    firstDealButton.click();
-    
-    const modalTitle = document.getElementById('dealTitle').value;
-    expect(modalTitle).toContain('Superdry'); // From your mock data
-    expect(document.getElementById('createDealModal').style.display).toBe('block');
+    document.querySelector('.create-deal-btn').click();
+
+    const modal = document.getElementById('createDealModal');
+    expect(modal.style.display).toBe('block');
+    expect(document.getElementById('dealTitle').value).toContain('Superdry');
   });
 
   test('Modal closes when clicking X', () => {
-    document.querySelector('.create-deal-btn').click(); // Open first
+    document.querySelector('.create-deal-btn').click();
     document.querySelector('.close').click();
-    expect(document.getElementById('createDealModal').style.display).toBe('none');
+
+    const modal = document.getElementById('createDealModal');
+    expect(modal.style.display).toBe('none');
   });
 });
