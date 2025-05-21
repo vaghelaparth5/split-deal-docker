@@ -56,3 +56,11 @@ exports.updateGroupStatus = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+exports.getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.find();
+    res.json(groups);
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
