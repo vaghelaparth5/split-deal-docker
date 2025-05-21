@@ -57,3 +57,23 @@ exports.deleteTeamMember = async (req, res) => {
       res.status(500).json({ msg: "Server Error", error });
     }
   };
+
+  // Verify a team member (Admin approval)
+exports.verifyTeamMember = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { isVerified } = req.body;
+  
+      const groupMember = await GroupMember.findByIdAndUpdate(
+        id,
+        { isVerified },
+        { new: true }
+      );
+  
+      if (!groupMember) return res.status(404).json({ msg: "Team member not found" });
+  
+      res.json({ msg: "Team member verification status updated", groupMember });
+    } catch (error) {
+      res.status(500).json({ msg: "Server Error", error });
+    }
+  };

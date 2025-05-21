@@ -4,7 +4,7 @@ const {
   createAdminGroupMember,
   createTeamMember,
   deleteTeamMember,
-  
+
 } = require("../controllers/groupMemberController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -17,5 +17,8 @@ router.post("/create-team-member", authMiddleware, createTeamMember);
 
 // Route to delete a team member
 router.delete("/delete-team-member/:id", authMiddleware, deleteTeamMember);
+
+// Route to verify a team member
+router.put("/verify-team-member/:id", authMiddleware, verifyTeamMember);
 
 module.exports = router;
