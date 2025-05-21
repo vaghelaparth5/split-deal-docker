@@ -19,5 +19,5 @@ const DealSchema = new mongoose.Schema({
   average_rating: { type: Number, default: 0 },
   number_of_ratings: { type: Number, default: 0 }
 });
-
+  
 module.exports = mongoose.model("Deal", DealSchema);
