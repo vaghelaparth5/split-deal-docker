@@ -43,3 +43,17 @@ exports.createTeamMember = async (req, res) => {
       res.status(500).json({ msg: "Server Error", error });
     }
   };
+
+  // Delete a team member from a group (Only Admin can remove)
+exports.deleteTeamMember = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const groupMember = await GroupMember.findByIdAndDelete(id);
+      if (!groupMember) return res.status(404).json({ msg: "Team member not found" });
+  
+      res.json({ msg: "Team member removed successfully" });
+    } catch (error) {
+      res.status(500).json({ msg: "Server Error", error });
+    }
+  };
