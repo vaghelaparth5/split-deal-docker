@@ -5,10 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Deals | SplitDeal</title>
   <link rel="stylesheet" href="/css/dealsDetails.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="/js/dealDetails.js"></script>
 </head>
 <body>
+  <header class="header">
+    <div class="container header__container">
+  <div class="header__logo"><img class="header__img" src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
+       
+    
+    <div class="header__menu">
+      <nav id="navbar" class="header__nav collapse">
+        <ul class="header__elenco">
+          <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+          <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+          <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+          <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+      </div>
+  </header>
   <div class="page-wrapper">
-    <aside class="sidebar">
+
+    <!-- <aside class="sidebar">
       <ul>
         <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/2560px-Levi%27s_logo.svg.png" alt="Levis" /></li>
         <li><img src="https://www.svgrepo.com/show/303173/nike-3-logo.svg" alt="Nike" /></li>
@@ -19,7 +39,7 @@
         <li><img src="data:image/png;base64,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" alt="Zara" /></li>
         <li><img src="data:image/png;base64,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" alt="Uniqlo" /></li>
       </ul>
-    </aside>
+    </aside> -->
 
     <main class="main-content full-width">
       <h2>🔥 Exclusive Deals Just for You</h2>
@@ -45,6 +65,55 @@
       </div>
     </main>
   </div>
+
+  <!-- Create Deal Modal -->
+<div id="createDealModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Create New Deal</h2>
+    <form id="dealForm">
+      <div class="form-group">
+        <label for="dealTitle">Title</label>
+        <input type="text" id="dealTitle" name="title" value="Superdry Winter Sale" required>
+      </div>
+      <div class="form-group">
+        <label for="dealDescription">Description</label>
+        <textarea id="dealDescription" name="description" rows="3">Get this exclusive deal on Superdry products!</textarea>
+      </div>
+      <div class="price-group">
+        <div class="form-group">
+          <label for="dealPrice">Price ($)</label>
+          <input type="number" id="dealPrice" name="price" required>
+        </div>
+        <div class="form-group">
+          <label for="dealOriginalPrice">Original Price ($)</label>
+          <input type="number" id="dealOriginalPrice" name="original_price" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dealDeadline">Deadline</label>
+        <input type="datetime-local" id="dealDeadline" name="deadline" value="2025-05-26T02:10" required>
+      </div>
+      <div class="form-group">
+        <label for="dealLocation">Location</label>
+        <input type="text" id="dealLocation" name="location" value="Convention Centre Pl, South Wharf">
+      </div>
+      <div class="form-group">
+        <label for="dealMaxParticipants">Max Participants</label>
+        <input type="number" id="dealMaxParticipants" name="max_participants" required>
+      </div>
+      <div class="form-group">
+        <label for="dealCategory">Category</label>
+        <input type="text" id="dealCategory" name="category">
+      </div>
+      <div class="form-group">
+        <label for="dealImage">Image URL</label>
+        <input type="text" id="dealImage" name="image_url">
+      </div>
+      <button type="submit" class="submit-btn">Create Deal</button>
+    </form>
+  </div>
+</div>
 
   <script src="/js/dealsDetails.js"></script>
 </body>
