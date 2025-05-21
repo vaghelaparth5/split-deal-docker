@@ -21,4 +21,7 @@ router.delete("/delete-team-member/:id", authMiddleware, deleteTeamMember);
 // Route to verify a team member
 router.put("/verify-team-member/:id", authMiddleware, verifyTeamMember);
 
+// Route to update ratings provided status
+router.put("/update-ratings-provided/:id", authMiddleware, updateRatingsProvided);
+
 module.exports = router;

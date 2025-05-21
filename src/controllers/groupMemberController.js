@@ -77,3 +77,27 @@ exports.verifyTeamMember = async (req, res) => {
       res.status(500).json({ msg: "Server Error", error });
     }
   };
+
+  // Update ratingsProvided status
+exports.updateRatingsProvided = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { ratingsProvided } = req.body;
+  
+      if (!["not submitted", "skipped", "submitted"].includes(ratingsProvided)) {
+        return res.status(400).json({ msg: "Invalid ratingsProvided status" });
+      }
+  
+      const groupMember = await GroupMember.findByIdAndUpdate(
+        id,
+        { ratingsProvided },
+        { new: true }
+      );
+  
+      if (!groupMember) return res.status(404).json({ msg: "Team member not found" });
+  
+      res.json({ msg: "Ratings status updated successfully", groupMember });
+    } catch (error) {
+      res.status(500).json({ msg: "Server Error", error });
+    }
+  };
