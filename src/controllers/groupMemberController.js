@@ -122,4 +122,24 @@ exports.updateRatingsProvided = async (req, res) => {
     }
   };
 
+    // Get all group members by userId
+  exports.getGroupIdsByUserId = async (req, res) => {
+    try {
+      const { userId } = req.params;
   
+      // Find all group members with the given userId
+      const groupMembers = await GroupMember.find({ userId }).select("groupId");
+  
+      if (!groupMembers || groupMembers.length === 0) {
+        return res.status(404).json({ msg: "No groups found for this user" });
+      }
+  
+      // Extract unique group IDs
+      const groupIds = [...new Set(groupMembers.map((member) => member.groupId.toString()))];
+  
+      res.json({ msg: "Group IDs fetched successfully", groupIds });
+    } catch (error) {
+      res.status(500).json({ msg: "Server Error", error });
+    }
+  };
+

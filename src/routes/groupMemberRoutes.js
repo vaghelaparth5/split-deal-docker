@@ -6,7 +6,8 @@ const {
   deleteTeamMember,
   verifyTeamMember,
   updateRatingsProvided,
-  getGroupMembersByGroupId
+  getGroupMembersByGroupId,
+  getGroupIdsByUserId
 
 } = require("../controllers/groupMemberController");
 
@@ -29,6 +30,7 @@ router.put("/update-ratings-provided/:id", authMiddleware, updateRatingsProvided
 
 router.get("/get-group-members/:groupId", authMiddleware, getGroupMembersByGroupId);
 
-
+// 📌 Route to get group IDs by user ID
+router.get("/get-group-ids/:userId", authMiddleware, getGroupIdsByUserId);
 
 module.exports = router;
