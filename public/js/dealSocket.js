@@ -33,7 +33,7 @@ window.onload = function () {
         return;
       }
 
-      message.textContent = `${data.msg}:<strong> ${data.deal.title}</strong>`;
+      message.textContent = `${data.msg}: ${data.deal.title}`;
       popup.classList.add("show");
 
       const timer = setTimeout(() => {
