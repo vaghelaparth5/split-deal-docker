@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {updateGroupStatus, createGroup, getAllGroups, getGroupById, deleteGroup, updateReceiptImage} = require("../controllers/groupController");
+const {updateGroupStatus, createGroup, getAllGroups, getGroupById, deleteGroup, updateReceiptImage, updateMembersRequired} = require("../controllers/groupController");
 
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -21,5 +21,7 @@ router.delete("/delete-group/:id", authMiddleware, deleteGroup);
 
 //Route to update receipt image based on group ID
 router.put("/update-receipt/:id", authMiddleware, updateReceiptImage);
+
+router.put("/update-members-required/:id", authMiddleware, updateMembersRequired);
 
 module.exports = router;
