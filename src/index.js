@@ -48,7 +48,10 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https://i.ibb.co", "https://image.ibb.co", "https://res.cloudinary.com", "*"],
+      imgSrc: [
+        "'self'",
+        "data:",
+      ],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://embed.tawk.to"],
       connectSrc: ["'self'", "https://api.tawk.to"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
