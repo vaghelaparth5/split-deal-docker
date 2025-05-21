@@ -6,13 +6,21 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "test-backend": "cross-env NODE_ENV=backend-test mocha",
+    "test-backend:unit": "cross-env NODE_ENV=backend-test mocha backend-test/unit/**/*.test.js",
+    "test-backend:e2e": "cross-env NODE_ENV=backend-test mocha backend-test/e2e/**/*.test.js",
+    "test-backend:watch": "cross-env NODE_ENV=backend-test mocha --watch",
+    "coverage-backend": "cross-env NODE_ENV=backend-test nyc --reporter=html --reporter=text mocha",
+    "coverage-backend:unit": "cross-env NODE_ENV=backend-test nyc --reporter=html --reporter=text mocha backend-test/unit/**/*.test.js",
+    "coverage-backend:e2e": "cross-env NODE_ENV=backend-test nyc --reporter=html --reporter=text mocha backend-test/e2e/**/*.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "chai": "^4.3.7",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -21,17 +29,25 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.14.2",
+    "mongodb-memory-server": "^10.1.4",
     "mongoose": "^8.12.1",
     "morgan": "^1.10.0",
     "nodemailer": "^7.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
+    "chai-as-promised": "^7.1.1",
     "chrome-location": "^1.2.1",
+    "cross-env": "^7.0.3",
     "cypress": "^14.3.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "nodemon": "^3.1.9"
+    "mocha": "^11.4.0",
+    "nodemon": "^3.1.9",
+    "nyc": "^17.1.0",
+    "sinon": "^20.0.0",
+    "sinon-chai": "^3.7.0",
+    "supertest": "^7.1.1"
   },
   "jest": {
     "testEnvironment": "jsdom"
