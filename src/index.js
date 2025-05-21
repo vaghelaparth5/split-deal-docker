@@ -91,4 +91,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
+//cron job
+const expireDealsJob = require('./cron/dealExpiryJob');
+expireDealsJob.start();
