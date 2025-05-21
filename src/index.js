@@ -32,14 +32,29 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  }
+}));
+
 // Set Content Security Policy
-// TODO : This neds to be removed in production
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      imgSrc: ["'self'", "data:", '*'],
-    },
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https://i.ibb.co", "https://image.ibb.co", "https://res.cloudinary.com", "*"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://embed.tawk.to"],
+      connectSrc: ["'self'", "https://api.tawk.to"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      frameSrc: ["https://embed.tawk.to"]
+    }
   })
 );
 
