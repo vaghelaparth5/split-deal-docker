@@ -76,3 +76,41 @@ exports.getGroupById = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+exports.deleteGroup = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find and delete the group
+    const group = await Group.findByIdAndDelete(id);
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Group deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+exports.updateReceiptImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { receiptImage } = req.body;
+
+    if (!receiptImage) {
+      return res.status(400).json({ msg: "Receipt image URL is required" });
+    }
+
+    const group = await Group.findByIdAndUpdate(
+      id,
+      { receiptImage },
+      { new: true } // Return the updated document
+    );
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Receipt image updated successfully", group });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
