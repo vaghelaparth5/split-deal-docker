@@ -1,40 +1,4 @@
-const deals = [
-  {
-    brand: "Superdry",
-    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1743473069/dqp71qo4nv2a8wpmgta2.webp",
-    title: "Superdry Winter Sale",
-    location: "Convention Centre Pl, South Wharf",
-    expiry: "April 25, 2025"
-  },
-  {
-    brand: "Tommy Hilfiger",
-    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742821088/e5sxqakk7aumxscyrvdz.png",
-    title: "Buy 2 get 2 Hoodies Free",
-    location: "Convention Centre Pl, South Wharf",
-    expiry: "April 30, 2025"
-  },
-  {
-    brand: "Zara",
-    logo: "https://res.cloudinary.com/du5br7g8b/image/upload/v1742222953/hpukw5lmrnwijhoem2hb.webp",
-    title: "Zara X Week",
-    location: "Melbourne Bourke Street",
-    expiry: "May 3, 2025"
-  },
-  {
-    brand: "Nike",
-    logo: "https://www.svgrepo.com/show/303173/nike-3-logo.svg",
-    title: "Nike Air Max 20% Off + Free Shipping",
-    location: "Melbourne Central",
-    expiry: "May 10, 2025"
-  },
-  {
-    brand: "Levi's",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/2560px-Levi%27s_logo.svg.png",
-    title: "Levi's Denim Discount - 25% Off",
-    location: "Bourke Street Mall",
-    expiry: "May 15, 2025"
-  }
-];
+let deals = []; // Will be populated from API
 
 const dealGrid = document.getElementById('dealGrid');
 const brandFilter = document.getElementById('brandFilter');
@@ -46,15 +10,17 @@ const dealForm = document.getElementById('dealForm');
 // Function to open modal with deal data
 function openModal(dealData) {
   if (dealData) {
-    // Pre-populate form with deal data if available
     document.getElementById('dealTitle').value = dealData.title || '';
-    document.getElementById('dealDescription').value = `Get this exclusive deal on ${dealData.brand} products!`;
+    document.getElementById('dealDescription').value = dealData.description || '';
     document.getElementById('dealLocation').value = dealData.location || '';
-    
-    // Set a default deadline (7 days from now)
-    const defaultDeadline = new Date();
-    defaultDeadline.setDate(defaultDeadline.getDate() + 7);
-    document.getElementById('dealDeadline').value = defaultDeadline.toISOString().slice(0, 16);
+    document.getElementById('dealPrice').value = dealData.price || '';
+    document.getElementById('dealOriginalPrice').value = dealData.original_price || '';
+    document.getElementById('dealMaxParticipants').value = dealData.max_participants || '';
+    document.getElementById('dealCategory').value = dealData.category || '';
+    document.getElementById('dealImage').value = dealData.image_url || '';
+
+    const deadline = dealData.deadline ? new Date(dealData.deadline) : new Date();
+    document.getElementById('dealDeadline').value = deadline.toISOString().slice(0, 16);
   }
   modal.style.display = 'block';
 }
@@ -66,53 +32,58 @@ function closeModal() {
 }
 
 // Event listeners for modal
-closeBtn.addEventListener('click', closeModal);
-window.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    closeModal();
-  }
-});
+if (closeBtn) {
+  closeBtn.addEventListener('click', closeModal);
+}
+
+if (modal) {
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+}
 
 // Handle form submission
-dealForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const formData = {
-    title: document.getElementById('dealTitle').value,
-    description: document.getElementById('dealDescription').value,
-    price: parseFloat(document.getElementById('dealPrice').value),
-    original_price: parseFloat(document.getElementById('dealOriginalPrice').value),
-    deadline: document.getElementById('dealDeadline').value,
-    location: document.getElementById('dealLocation').value,
-    max_participants: parseInt(document.getElementById('dealMaxParticipants').value),
-    category: document.getElementById('dealCategory').value,
-    image_url: document.getElementById('dealImage').value
-  };
+if (dealForm) {
+  dealForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch('/api/deals', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
+    const formData = {
+      title: document.getElementById('dealTitle').value,
+      description: document.getElementById('dealDescription').value,
+      price: parseFloat(document.getElementById('dealPrice').value),
+      original_price: parseFloat(document.getElementById('dealOriginalPrice').value),
+      deadline: document.getElementById('dealDeadline').value,
+      location: document.getElementById('dealLocation').value,
+      max_participants: parseInt(document.getElementById('dealMaxParticipants').value),
+      category: document.getElementById('dealCategory').value,
+      image_url: document.getElementById('dealImage').value
+    };
 
-    if (response.ok) {
-      alert('Deal created successfully!');
-      closeModal();
-      // You might want to refresh the deals list here
-    } else {
-      const errorData = await response.json();
-      alert(`Error: ${errorData.message || 'Failed to create deal'}`);
+    try {
+      const response = await fetch('/api/deals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        closeModal();
+        await fetchDeals(); // Refresh the deals list
+      } else {
+        const errorData = await response.json();
+        console.error('Error:', errorData.message || 'Failed to create deal');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred while creating the deal');
-  }
-});
+  });
+}
 
 function renderDeals(filteredDeals) {
+  if (!dealGrid) return;
+
   dealGrid.innerHTML = "";
 
   if (filteredDeals.length === 0) {
@@ -124,38 +95,81 @@ function renderDeals(filteredDeals) {
     const card = document.createElement('div');
     card.className = 'deal-card';
     card.innerHTML = `
-      <img src="${deal.logo}" alt="${deal.brand}" />
+      <img src="${deal.image_url || 'https://via.placeholder.com/150'}" alt="${deal.title}" />
       <h3>${deal.title}</h3>
-      <p>${deal.location}</p>
-      <p><strong>Expiry:</strong> ${deal.expiry}</p>
-      <button class="create-deal-btn">Create Deal 🚀</button>
+      <p>${deal.description || ''}</p>
+      <p>${deal.location || 'Location not specified'}</p>
+      <p><strong>Price:</strong> $${deal.price} <s>$${deal.original_price}</s></p>
+      <p><strong>Expiry:</strong> ${new Date(deal.deadline).toLocaleDateString()}</p>
+      <button class="create-deal-btn">Create Group 🚀</button>
     `;
     dealGrid.appendChild(card);
-    
-    // Add event listener to the button
+
     const button = card.querySelector('.create-deal-btn');
     button.addEventListener('click', () => openModal(deal));
   });
 }
 
 function applyFilters() {
-  const selectedBrand = brandFilter.value.toLowerCase();
-  const searchText = searchInput.value.toLowerCase();
+  const selectedBrand = brandFilter ? brandFilter.value.toLowerCase() : 'all';
+  const searchText = searchInput ? searchInput.value.toLowerCase() : '';
 
   const filtered = deals.filter(deal => {
-    const brandMatch = selectedBrand === "all" || deal.brand.toLowerCase() === selectedBrand;
-    const textMatch =
-      deal.brand.toLowerCase().includes(searchText) ||
-      deal.title.toLowerCase().includes(searchText);
+    const brandMatch = selectedBrand === "all" || 
+      (deal.brand && deal.brand.toLowerCase().includes(selectedBrand)) ||
+      (deal.title && deal.title.toLowerCase().includes(selectedBrand));
+      
+    const textMatch = searchText === '' || 
+      (deal.title && deal.title.toLowerCase().includes(searchText)) ||
+      (deal.description && deal.description.toLowerCase().includes(searchText)) ||
+      (deal.category && deal.category.toLowerCase().includes(searchText));
+      
     return brandMatch && textMatch;
   });
 
   renderDeals(filtered);
 }
 
-// Initial render
-renderDeals(deals);
+async function fetchDeals() {
+  try {
+    const response = await fetch('http://localhost:3000/api/deal/get');
+    const data = await response.json();
+    deals = data.deals || [];
+    applyFilters(); // Apply current filters after fetching
+  } catch (error) {
+    console.error('Failed to fetch deals:', error);
+    if (dealGrid) {
+      dealGrid.innerHTML = "<p>Error loading deals.</p>";
+    }
+  }
+}
 
-// Event listeners
-brandFilter.addEventListener('change', applyFilters);
-searchInput.addEventListener('input', applyFilters);
+// Initialize event listeners
+if (brandFilter && searchInput) {
+  brandFilter.addEventListener('change', applyFilters);
+  searchInput.addEventListener('input', applyFilters);
+  
+  // Initial fetch
+  fetchDeals();
+}
+
+// math.js
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = {
+  deals,
+  openModal,
+  closeModal,
+  dealForm, // Exporting elements initialized at top level
+  dealGrid,
+  brandFilter,
+  searchInput,
+  modal,
+  closeBtn,
+  renderDeals,
+  applyFilters,
+  fetchDeals,
+  add // If you keep this function
+};

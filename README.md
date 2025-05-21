@@ -46,3 +46,9 @@ Endpoint	Method	Description	Request Body Example
 Testing
 Manual Testing in Postman
 
+Testing command for jest 
+npm run test
+
+To run Cypress 
+npx cypress open
+
