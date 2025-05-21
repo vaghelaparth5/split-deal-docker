@@ -76,3 +76,18 @@ exports.getGroupById = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+exports.deleteGroup = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find and delete the group
+    const group = await Group.findByIdAndDelete(id);
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Group deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
