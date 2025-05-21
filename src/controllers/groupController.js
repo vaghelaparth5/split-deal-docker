@@ -64,3 +64,15 @@ exports.getAllGroups = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+//  Get group by ID
+exports.getGroupById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const group = await Group.findById(id);
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+    res.json(group);
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
