@@ -4,6 +4,9 @@ const {
   createAdminGroupMember,
   createTeamMember,
   deleteTeamMember,
+  verifyTeamMember,
+  updateRatingsProvided,
+  getGroupMembersByGroupId
 
 } = require("../controllers/groupMemberController");
 
@@ -23,5 +26,9 @@ router.put("/verify-team-member/:id", authMiddleware, verifyTeamMember);
 
 // Route to update ratings provided status
 router.put("/update-ratings-provided/:id", authMiddleware, updateRatingsProvided);
+
+router.get("/get-group-members/:groupId", authMiddleware, getGroupMembersByGroupId);
+
+
 
 module.exports = router;

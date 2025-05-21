@@ -101,3 +101,25 @@ exports.updateRatingsProvided = async (req, res) => {
       res.status(500).json({ msg: "Server Error", error });
     }
   };
+
+  // Get all group members by groupId
+  exports.getGroupMembersByGroupId = async (req, res) => {
+    try {
+      const { groupId } = req.params;
+  
+      // Find all group members with the given groupId
+      const groupMembers = await GroupMember.find({ groupId })
+        .populate("userId", "name email") // Populate user details (optional)
+        .populate("dealId", "dealName dealDesc"); // Populate deal details (optional)
+  
+      if (!groupMembers || groupMembers.length === 0) {
+        return res.status(404).json({ msg: "No group members found for this group" });
+      }
+  
+      res.json({ msg: "Group members fetched successfully", groupMembers });
+    } catch (error) {
+      res.status(500).json({ msg: "Server Error", error });
+    }
+  };
+
+  
