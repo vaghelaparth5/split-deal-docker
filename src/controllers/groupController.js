@@ -114,3 +114,26 @@ exports.updateReceiptImage = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+exports.updateMembersRequired = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { membersRequired } = req.body;
+
+    if (!membersRequired || membersRequired < 1) {
+      return res.status(400).json({ msg: "Valid membersRequired value is required" });
+    }
+
+    const group = await Group.findByIdAndUpdate(
+      id,
+      { membersRequired },
+      { new: true } // Return the updated document
+    );
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Members required updated successfully", group });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
