@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
   successful_orders: { type: Number, default: 0 },
   failure_order: { type: Number, default: 0 },
   total_money_saved: { type: Number, default: 0 },
-  // Fields for password reset
   resetPasswordToken: { type: String , default: "" },
   resetPasswordExpires: { type: Date , default: "" }
 });
