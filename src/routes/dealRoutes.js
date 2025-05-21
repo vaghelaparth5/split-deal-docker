@@ -13,6 +13,8 @@ const {
 
 router.post("/create", authMiddleware, createDeal);
 router.get("/get", getDeals);
+
+// Manually expire outdated deals
 router.patch("/expire", authMiddleware, expireDeals);
 router.get("/:id", authMiddleware, getDealById);
 router.put("/:id", authMiddleware, updateDeal);

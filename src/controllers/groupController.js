@@ -56,3 +56,84 @@ exports.updateGroupStatus = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+exports.getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.find();
+    res.json(groups);
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+//  Get group by ID
+exports.getGroupById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const group = await Group.findById(id);
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+    res.json(group);
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+exports.deleteGroup = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find and delete the group
+    const group = await Group.findByIdAndDelete(id);
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Group deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+exports.updateReceiptImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { receiptImage } = req.body;
+
+    if (!receiptImage) {
+      return res.status(400).json({ msg: "Receipt image URL is required" });
+    }
+
+    const group = await Group.findByIdAndUpdate(
+      id,
+      { receiptImage },
+      { new: true } // Return the updated document
+    );
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Receipt image updated successfully", group });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+exports.updateMembersRequired = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { membersRequired } = req.body;
+
+    if (!membersRequired || membersRequired < 1) {
+      return res.status(400).json({ msg: "Valid membersRequired value is required" });
+    }
+
+    const group = await Group.findByIdAndUpdate(
+      id,
+      { membersRequired },
+      { new: true } // Return the updated document
+    );
+
+    if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    res.json({ msg: "Members required updated successfully", group });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
