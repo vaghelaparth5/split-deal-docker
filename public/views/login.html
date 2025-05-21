@@ -1,34 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/login.css">
+  <style>
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+    .profile-icon {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #555;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+    }
+    .dropdown a:hover {
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
     <div class="container header__container">
-  <div class="header__logo"><img class="header__img" src="./images/split-deal-logo.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
-    
-    <div class="header__menu">
-      <nav id="navbar" class="header__nav collapse">
-        <ul class="header__elenco">
-          <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-          <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-          <li class="header__el"><a href="#" class="header__link">About Us</a></li>
-          <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="header__logo">
+        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170" />
+        <h1 class="header__title"></h1>
       </div>
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profile.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
-  
+
   <div class="main_body">
     <form id="authForm" class="form">
       <h2 id="formTitle">Sign In</h2>
-      
-      <!-- Name field only for Signup -->
       <div class="flex-column field-group" id="nameField" style="display: none;">
         <label>Name</label>
         <div class="inputForm">
@@ -36,43 +83,40 @@
         </div>
       </div>
 
-      <!-- Email -->
       <div class="flex-column field-group">
         <label>Email</label>
         <div class="inputForm">
-          <input type="name" id="email" class="input" placeholder="Enter your Email" required />
+          <input type="email" id="email" class="input" placeholder="Enter your Email" required />
         </div>
       </div>
-      
-      <!-- Password -->
+
       <div class="flex-column field-group">
         <label>Password</label>
         <div class="inputForm">
           <input type="password" id="password" class="input" placeholder="Enter your Password" required minlength="6" />
         </div>
       </div>
-      
-      <!-- Confirm Password only for Signup -->
+
       <div class="flex-column field-group" id="confirmField" style="display: none;">
         <label>Confirm Password</label>
         <div class="inputForm">
           <input type="password" id="confirmPassword" class="input" placeholder="Confirm your Password" />
         </div>
       </div>
-      
+
       <div class="flex-row">
         <input type="checkbox" id="rememberMe" />
         <label for="rememberMe">Remember me</label>
       </div>
-      
+
       <button type="submit" class="button-submit" id="submitBtn">Sign In</button>
-      
       <p class="p">
         <span id="toggleText">Don't have an account?</span>
         <span class="span" id="toggleLink">Sign Up</span>
       </p>
     </form>
   </div>
+
   <script src="/js/auth.js"></script>
 </body>
 </html>
