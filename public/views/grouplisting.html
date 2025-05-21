@@ -3,22 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Group Deals</title>
+  <title>SplitDeal | Group Deals</title>
   <link rel="stylesheet" href="../css/grouplisting.css" />
 </head>
 <body>
-  <h1>Available Group Deals!!</h1>
-  <div id="group-grid" class="grid"></div>
+  <header class="header">
+    <h1>Find & Join Amazing <span class="highlight">Group Deals</span> on SplitDeal!</h1>
+    <div class="filters">
+      <input type="text" id="search" placeholder="🔍 Search Deals..." />
+      <select id="filter-location">
+        <option value="">📍 All Locations</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div id="group-grid" class="grid"></div>
+  </main>
 
   <!-- Modal -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2 id="modal-title"></h2>
-      <img id="modal-img" src="../css/grouplisting.css" />
-      <p id="modal-desc"></p>
-      <p id="modal-price"></p>
-      <button onclick="confirmJoin()">Confirm Join</button>
+      <span class="close-btn" id="close-btn">&times;</span>
+      <img id="modal-img" src="" class="modal-img" />
+      <h2 id="modal-title" class="modal-title"></h2>
+      <p id="modal-desc" class="modal-desc"></p>
+      <p id="modal-price" class="modal-price"></p>
+      <p id="modal-deadline" class="modal-deadline"></p>
+      <button id="join-btn" class="join-btn">Confirm Join</button>
     </div>
   </div>
 
