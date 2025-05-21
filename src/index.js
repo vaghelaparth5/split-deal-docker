@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const path = require('path');
+const http = require('http');                    // ✅ Added
+const { Server } = require('socket.io');         // ✅ Added
 
 // Load environment variables
 dotenv.config();
@@ -14,11 +16,20 @@ dotenv.config();
 // Create Express app
 const app = express();
 
+// Create HTTP server
+const server = http.createServer(app);           // ✅ Added
+
+// Attach Socket.IO to the server
+const io = new Server(server, {
+  cors: {
+    origin: "*", // 🔐 In production, replace with frontend origin
+    methods: ["GET", "POST"]
+  }
+});
+app.set("io", io);                                // ✅ Make io accessible to controllers
+
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
-// const userRoutes = require("./routes/userRoutes");
-// const categoryRoutes = require('./routes/categoryRoutes');
-// const subCategoryRoutes = require('./routes/SubCategoryRoutes');
 const dealRoutes = require('./routes/dealRoutes');
 const groupRoutes = require('./routes/groupRoutes');
 const groupMemberRoutes = require('./routes/groupMemberRoutes');
@@ -61,20 +72,17 @@ app.use(
   })
 );
 
+// Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/category", categoryRoutes);
-// app.use("/api/sub-category", subCategoryRoutes);
-// app.use("/api/user", userRoutes);
 app.use("/api/deal", dealRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/groupMember", groupMemberRoutes);
 
-// Database connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Routes
+// Serve index.html from public folder
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
@@ -85,8 +93,17 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-// Start server
+// Socket.IO connection (optional logging)
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
+// Start the server using `server` (not app)
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
