@@ -126,5 +126,24 @@ describe('Group Controller - Unit Tests', () => {
         });
     });
 
+    describe('deleteGroup', () => {
+        it('should delete a group', async () => {
+            req.params.id = '123';
+            sandbox.stub(Group, 'findByIdAndDelete').resolves({});
+
+            await groupController.deleteGroup(req, res);
+
+            expect(res.json.calledOnce).to.be.true;
+        });
+
+        it('should return 404 if not found', async () => {
+            req.params.id = '123';
+            sandbox.stub(Group, 'findByIdAndDelete').resolves(null);
+
+            await groupController.deleteGroup(req, res);
+
+            expect(res.status.calledWith(404)).to.be.true;
+        });
+    });
 
 });
