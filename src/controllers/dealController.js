@@ -29,8 +29,21 @@ exports.createDeal = async (req, res) => {
     });
 
     await newDeal.save();
+    // ✅ Debug print for io
+    const io = req.app.get("io");
+    if (!io) {
+      console.error("❌ io is not available from req.app");
+    } else {
+      console.log("✅ io is available, emitting event");
+      io.emit("new_deal", {
+        msg: "A new deal has been added \n",
+        deal: newDeal,
+      });
+    }
+
     res.status(201).json({ msg: "Deal created successfully", deal: newDeal });
   } catch (error) {
+    console.error("🔥 Error in createDeal:", error);
     res.status(500).json({ msg: "Server Error", error });
   }
 };
