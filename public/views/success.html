@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success Page</title>
-    <link rel="stylesheet" href="/css/success.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Page</title>
+  <link rel="stylesheet" href="/css/success.css">
+  <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
+
 <body>
-        <!-- From Uiverse.io by Yaya12085 --> 
-<div class="card"> 
-    <button class="dismiss" type="button">×</button> 
-    <div class="header"> 
+  <!-- From Uiverse.io by Yaya12085 -->
+  <div class="card">
+    <button class="dismiss" type="button">×</button>
+    <div class="header">
       <div class="image">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        </div> 
-        <div class="content">
-           <span class="title">Order validated</span> 
-           <p class="message">Thank you for your purchase. you package will be delivered within 2 days of your purchase</p> 
-           </div> 
-           <div class="actions">
-              <button class="history" type="button">History</button> 
-              <button class="track" type="button">Track my package</button> 
-              </div> 
-              </div> 
-              </div>
-                <!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-container">
-    <div>
-      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="content">
+        <span class="title">Order validated</span>
+        <p class="message">Thank you for your purchase. you package will be delivered within 2 days of your purchase</p>
+      </div>
+      <div class="actions">
+        <button class="history" type="button">History</button>
+        <button class="track" type="button">Track my package</button>
+      </div>
     </div>
-
-    <div class="footer-text">
-      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-      <p>© 2025 IT Labs.</p>
-    </div>
-
-   
   </div>
-</footer>
+  <!-- 🛍️ Deal Notification (Shared across all pages) -->
+  <div id="deal-notification" class="deal-popup">
+    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+    <div class="deal-text">
+      <strong id="deal-title"></strong><br />
+      <span id="deal-price"></span><br />
+      <span id="deal-location"></span><br />
+      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+    </div>
+    <button id="close-notification" class="close-btn">×</button>
+  </div>
+
+  <!-- 👥 Group Notification (Shared across all pages) -->
+  <div id="group-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
+
 </body>
+
 </html>

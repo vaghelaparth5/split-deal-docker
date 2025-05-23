@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/chat.css">
+  <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
+
 <body>
   <header class="header">
     <div class="container header__container">
@@ -24,10 +28,11 @@
       </nav>
     </div>
       </div>
+    </div>
   </header>
-  
-<!-- From Uiverse.io by ahmed150up --> 
-<div class="chatcontainer">
+
+  <!-- From Uiverse.io by ahmed150up -->
+  <div class="chatcontainer">
     <div class="chat-card">
       <div class="chat-header">
         <h2>Group Chat</h2>
@@ -69,5 +74,9 @@
 <!-- ========== END FOOTER ========== -->
 
   <script src="/js/chat.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
+
 </body>
+
 </html>
