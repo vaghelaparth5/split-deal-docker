@@ -54,14 +54,30 @@
           </ul>
         </nav>
       </div>
-      <div id="deal-notification" class="notification-popup">
-        <span id="notification-message"></span>
+
+      <div id="deal-notification" class="deal-popup">
+        <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+        <div class="deal-text">
+          <strong id="deal-title"></strong><br />
+          <span id="deal-price"></span><br />
+          <span id="deal-location"></span><br />
+          <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+        </div>
         <button id="close-notification" class="close-btn">×</button>
       </div>
     </div>
   </header>
 
-  <!-- ✅ Notification (Top-right Toast) -->
+  <!-- 👥 Group Notification -->
+  <div id="group-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
 
 
   <!-- Hero Section -->
@@ -81,16 +97,14 @@
         </div>
         <img class="site__img" src="./images/mockup.jpg">
       </div>
-      </div>
-      </div>
     </div>
+  </div>
+  </div>
   </div>
 
   <!-- JS Dependencies -->
   <script src="/socket.io/socket.io.js"></script>
-  <script src="./js/dealSocket.js">
-    
-  </script>
+  <script src="./js/mainSocket.js"></script>
 
   <!-- Your Page Scripts -->
   <script src="/js/dealDetails.js"></script>

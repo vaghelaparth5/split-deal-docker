@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/chat.css">
+  <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
+
 <body>
   <header class="header">
     <div class="container header__container">
-  <div class="header__logo"><img class="header__img" src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
-       
-    
-    <div class="header__menu">
-      <nav id="navbar" class="header__nav collapse">
-        <ul class="header__elenco">
-          <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-          <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-          <li class="header__el"><a href="#" class="header__link">About Us</a></li>
-          <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="header__logo"><img class="header__img"
+          src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40"
+          width="170">
+        <h1 class="header__title"></h1>
       </div>
+
+
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
-  
-<!-- From Uiverse.io by ahmed150up --> 
-<div class="chatcontainer">
+
+  <!-- From Uiverse.io by ahmed150up -->
+  <div class="chatcontainer">
     <div class="chat-card">
       <div class="chat-header">
         <h2>Group Chat</h2>
@@ -48,8 +56,34 @@
       </div>
     </div>
   </div>
-  
-  
+
+  <!-- 🛍️ Deal Notification (Shared across all pages) -->
+  <div id="deal-notification" class="deal-popup">
+    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+    <div class="deal-text">
+      <strong id="deal-title"></strong><br />
+      <span id="deal-price"></span><br />
+      <span id="deal-location"></span><br />
+      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+    </div>
+    <button id="close-notification" class="close-btn">×</button>
+  </div>
+
+  <!-- 👥 Group Notification (Shared across all pages) -->
+  <div id="group-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
+
   <script src="/js/chat.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
+
 </body>
+
 </html>
