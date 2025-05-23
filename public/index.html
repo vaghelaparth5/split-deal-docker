@@ -1,40 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Deal Details</title>
   <link rel="stylesheet" href="./css/styles.css" />
 
+  <style>
+    .notification-popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #fff9c4;
+      color: #333;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      max-width: 300px;
+      font-weight: bold;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Header/Navbar -->
   <header class="header">
     <div class="container header__container">
-  <div class="header__logo"><img class="header__img" src="./images/split-deal-logo.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
-       
-    
-    <div class="header__menu">
-      <nav id="navbar" class="header__nav collapse">
-        <ul class="header__elenco">
-          <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-          <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-          <li class="header__el"><a href="#" class="header__link">About Us</a></li>
-          <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="header__logo">
+        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170">
+        <h1 class="header__title"></h1>
       </div>
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div id="deal-notification" class="notification-popup">
+        <span id="notification-message"></span>
+        <button id="close-notification" class="close-btn">×</button>
+      </div>
+    </div>
   </header>
-  
+
+  <!-- ✅ Notification (Top-right Toast) -->
+
+
+  <!-- Hero Section -->
   <div class="sect sect--padding-top">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-      <div class="site">
-        <h1 class="site__title">Share and Recieve the Best Deals In Your Area!</h1>
-        <h2 class="site__subtitle">Connect with others to unlock the power of group buying—pool together!</h2>
-        <div class="site__box-link">
-          <a class="btn btn--width" href="./views/dealsDetails.html">Search Deals</a>
+          <div class="site">
+            <h1 class="site__title">Share and Receive the Best Deals In Your Area!</h1>
+            <h2 class="site__subtitle">Connect with others to unlock the power of group buying—pool together!</h2>
+            <div class="site__box-link">
+              <a class="btn btn--width" href="./views/dealsDetails.html">Search Deals</a>
+            </div>
+            <img class="site__img" src="https://i.ibb.co/9m97Kgz8/Flinder-Street-Mockup.jpg"
+              alt="Flinder Street Mockup">
+          </div>
         </div>
         <img class="site__img" src="./images/mockup.jpg">
       </div>
@@ -42,27 +85,30 @@
       </div>
     </div>
   </div>
-  
 
-  <script src="./js/dealsDetails.js"></script>
-  <!--Start of Tawk.to Script-->
+  <!-- JS Dependencies -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./js/dealSocket.js">
+    
+  </script>
 
-<!-- Tawk.to minimal working version -->
-<script type="application/javascript">
+  <!-- Your Page Scripts -->
+  <script src="/js/dealDetails.js"></script>
 
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-  (function () {
-    var s1 = document.createElement("script");
-    s1.src = "https://embed.tawk.to/682c975835b0fb19122c68a6/1irn2ud71";
-    s1.async = true;
-    s1.onload = () => console.log("Tawk.to loaded!");
-    document.body.appendChild(s1);
-  })();
+  <!-- Optional: Tawk.to Chat -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script");
+      s1.src = "https://embed.tawk.to/682c975835b0fb19122c68a6/1irn2ud71";
+      s1.async = true;
+      s1.onload = () => console.log("Tawk.to loaded!");
+      document.body.appendChild(s1);
+    })();
+  </script>
 
-</script>
+  <script type="application/javascript"></script>
 
-  <!--End of Tawk.to Script-->
-  </body>
-
+</body>
 
 </html>
