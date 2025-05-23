@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>User Profile & Deals</title>
   <link rel="stylesheet" href="../css/profilepage.css">
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
+
 <body>
-    <header class="header">
-        <div class="container header__container">
-      <div class="header__logo"><img class="header__img" src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
-           
-        
-        <div class="header__menu">
-          <nav id="navbar" class="header__nav collapse">
-            <ul class="header__elenco">
-              <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-              <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-              <li class="header__el"><a href="/views/aboutus.html" class="header__link">About Us</a></li>
-              <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-            </ul>
-          </nav>
-        </div>
-          </div>
-      </header>
+  <header class="header">
+    <div class="container header__container">
+      <div class="header__logo"><img class="header__img"
+          src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40"
+          width="170">
+        <h1 class="header__title"></h1>
+      </div>
+
+
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="/views/aboutus.html" class="header__link">About Us</a></li>
+            <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <main class="main-grid">
     <!-- left column: profile -->
@@ -44,8 +51,9 @@
     <section class="deals-col">
       <h1 class="deals-title">Welcome to Your Group Deals</h1>
       <p class="deals-intro">
-        Below you'll find all your <strong>active</strong> and <strong>completed</strong> group deals.  
-        Stay updated with your current collaborations and take a nostalgic look at the awesome group activities you've completed in the past.
+        Below you'll find all your <strong>active</strong> and <strong>completed</strong> group deals.
+        Stay updated with your current collaborations and take a nostalgic look at the awesome group activities you've
+        completed in the past.
       </p>
 
       <div class="tabs">
@@ -64,7 +72,9 @@
               <p>4 members • Started Apr 10, 2025</p>
             </div>
             <div class="group-card">
-              <img src="https://static.vecteezy.com/system/resources/previews/010/994/276/non_2x/adidas-logo-symbol-clothes-design-icon-abstract-football-illustration-free-vector.jpg" alt="">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/010/994/276/non_2x/adidas-logo-symbol-clothes-design-icon-abstract-football-illustration-free-vector.jpg"
+                alt="">
               <h3>May Rent Share</h3>
               <p>3 members • Started May 1, 2025</p>
             </div>
@@ -112,7 +122,31 @@
       </div>
     </section>
   </main>
+  <!-- 🛍️ Deal Notification (Shared across all pages) -->
+  <div id="deal-notification" class="deal-popup">
+    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+    <div class="deal-text">
+      <strong id="deal-title"></strong><br />
+      <span id="deal-price"></span><br />
+      <span id="deal-location"></span><br />
+      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+    </div>
+    <button id="close-notification" class="close-btn">×</button>
+  </div>
 
+  <!-- 👥 Group Notification (Shared across all pages) -->
+  <div id="group-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
   <script src="/js/profile.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
 </body>
+
 </html>

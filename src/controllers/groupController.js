@@ -19,7 +19,7 @@ exports.createGroup = async (req, res) => {
 
     // Create and save group
     const group = new Group({
-        dealId,
+      dealId,
       dealLogo,
       dealTitle,
       dealDescription,
@@ -32,6 +32,14 @@ exports.createGroup = async (req, res) => {
       receiptImage,
     });
     await group.save();
+
+    const io = req.app.get("io");
+    if (io) {
+      io.emit("new_group", {
+        msg: "A new group has been created",
+        group,
+      });
+    }
 
     res.status(201).json({ msg: "Group created successfully", group });
   } catch (error) {
