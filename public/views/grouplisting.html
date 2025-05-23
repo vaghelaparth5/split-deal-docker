@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SplitDeal | Group Deals</title>
   <link rel="stylesheet" href="../css/grouplisting.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
+
 <body>
   <header class="header">
     <h1>Find & Join Amazing <span class="highlight">Group Deals</span> on SplitDeal!</h1>
@@ -33,7 +37,33 @@
       <button id="join-btn" class="join-btn">Confirm Join</button>
     </div>
   </div>
+  <!-- 🛍️ Deal Notification (Shared across all pages) -->
+  <div id="deal-notification" class="deal-popup">
+    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+    <div class="deal-text">
+      <strong id="deal-title"></strong><br />
+      <span id="deal-price"></span><br />
+      <span id="deal-location"></span><br />
+      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+    </div>
+    <button id="close-notification" class="close-btn">×</button>
+  </div>
+
+  <!-- 👥 Group Notification (Shared across all pages) -->
+  <div id="group-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
 
   <script src="../js/groups.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
+
 </body>
+
 </html>
