@@ -163,5 +163,25 @@ describe('Group Controller - Unit Tests', () => {
             expect(res.json.calledWith([])).to.be.true;
         });
     });
+    
+    describe('getGroupById', () => {
+        it('should return a group', async () => {
+            req.params.id = '123';
+            const mockGroup = { dealTitle: 'Test Group' };
+            sandbox.stub(Group, 'findById').resolves(mockGroup);
 
+            await groupController.getGroupById(req, res);
+
+            expect(res.json.calledWith(mockGroup)).to.be.true;
+        });
+
+        it('should return 404 if not found', async () => {
+            req.params.id = '123';
+            sandbox.stub(Group, 'findById').resolves(null);
+
+            await groupController.getGroupById(req, res);
+
+            expect(res.status.calledWith(404)).to.be.true;
+        });
+    });
 });
