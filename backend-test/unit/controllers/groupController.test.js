@@ -91,4 +91,40 @@ describe('Group Controller - Unit Tests', () => {
             expect(res.status.calledWith(400)).to.be.true;
         });
     });
+    describe('updateReceiptImage', () => {
+        it('should update receipt image', async () => {
+            req.params.id = '123';
+            req.body.receiptImage = 'image.jpg';
+            const updatedGroup = { receiptImage: 'image.jpg' };
+
+            sandbox.stub(Group, 'findByIdAndUpdate').resolves(updatedGroup);
+
+            await groupController.updateReceiptImage(req, res);
+
+            expect(res.json.calledWithMatch({ group: updatedGroup })).to.be.true;
+        });
+
+        it('should return 400 if image missing', async () => {
+            req.params.id = '123';
+            req.body.receiptImage = '';
+
+            await groupController.updateReceiptImage(req, res);
+
+            expect(res.status.calledWith(400)).to.be.true;
+        });
+
+        it('should accept any string even if not a valid image (unless validated)', async () => {
+            req.params.id = '123';
+            req.body.receiptImage = 'not-an-image-url';
+
+            const updatedGroup = { receiptImage: 'not-an-image-url' };
+            sandbox.stub(Group, 'findByIdAndUpdate').resolves(updatedGroup);
+
+            await groupController.updateReceiptImage(req, res);
+
+            expect(res.json.calledWithMatch({ group: updatedGroup })).to.be.true;
+        });
+    });
+
+
 });
