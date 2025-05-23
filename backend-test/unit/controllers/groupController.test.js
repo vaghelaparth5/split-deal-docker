@@ -145,5 +145,23 @@ describe('Group Controller - Unit Tests', () => {
             expect(res.status.calledWith(404)).to.be.true;
         });
     });
+    describe('getAllGroups', () => {
+        it('should return all groups', async () => {
+            const mockGroups = [{ dealTitle: 'Test' }];
+            sandbox.stub(Group, 'find').resolves(mockGroups);
+
+            await groupController.getAllGroups(req, res);
+
+            expect(res.json.calledWith(mockGroups)).to.be.true;
+        });
+
+        it('should return empty array if no groups exist', async () => {
+            sandbox.stub(Group, 'find').resolves([]);
+
+            await groupController.getAllGroups(req, res);
+
+            expect(res.json.calledWith([])).to.be.true;
+        });
+    });
 
 });
