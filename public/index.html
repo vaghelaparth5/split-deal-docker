@@ -41,18 +41,28 @@
   <!-- Header/Navbar -->
   <header class="header">
     <div class="container header__container">
-      <div class="header__logo"><img class="header__img" src="/images/split-deal-logo.png==" height="40" width="170"> <h1 class="header__title"></h1></div> 
-    <div class="header__menu">
-      <nav id="navbar" class="header__nav collapse">
-        <ul class="header__elenco">
-          <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-          <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-          <li class="header__el"><a href="/views/aboutus.html" class="header__link">About Us</a></li>
-          <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-          <li class="header__el"><a href="/views/profilepage.html" class="header__link">Profile</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="header__logo">
+        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170">
+        <h1 class="header__title"></h1>
+      </div>
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profile.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
       </div>
     
 
@@ -64,7 +74,7 @@
           <span id="deal-location"></span><br />
           <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
         </div>
-        <button id="close-notification" class="close-btn">×</button>
+        <button id="close-notification" class="close-btn">x</button>
       </div>
     </div>
   </header>
@@ -183,6 +193,9 @@
 
   <script type="application/javascript"></script>
 
+<script src="/js/auth.js"></script>
+
+  <!--End of Tawk.to Script-->
   </body>
 
 </html>
