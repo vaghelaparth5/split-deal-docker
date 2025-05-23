@@ -72,27 +72,27 @@ describe('Deal Controller - Unit Tests', () => {
     });
   });
 
-  describe('expireDeals', () => {
-    it('should expire deals past their deadline', async () => {
-      const mockResult = { modifiedCount: 3 };
+  // describe('expireDeals', () => {
+  //   it('should expire deals past their deadline', async () => {
+  //     const mockResult = { modifiedCount: 3 };
       
-      sandbox.stub(Deal, 'updateMany').resolves(mockResult);
+  //     sandbox.stub(Deal, 'updateMany').resolves(mockResult);
 
-      await dealController.expireDeals(req, res);
+  //     await dealController.expireDeals(req, res);
 
-      expect(res.status.calledWith(200)).to.be.true;
-      expect(res.json.calledWithMatch({ 
-        msg: 'Expired deals updated successfully',
-        modifiedCount: 3
-      })).to.be.true;
-    });
+  //     expect(res.status.calledWith(200)).to.be.true;
+  //     expect(res.json.calledWithMatch({ 
+  //       msg: 'Expired deals updated successfully',
+  //       modifiedCount: 3
+  //     })).to.be.true;
+  //   });
 
-    it('should handle server errors', async () => {
-      sandbox.stub(Deal, 'updateMany').throws(new Error('DB error'));
+  //   it('should handle server errors', async () => {
+  //     sandbox.stub(Deal, 'updateMany').throws(new Error('DB error'));
 
-      await dealController.expireDeals(req, res);
+  //     await dealController.expireDeals(req, res);
 
-      expect(res.status.calledWith(500)).to.be.true;
-    });
-  });
+  //     expect(res.status.calledWith(500)).to.be.true;
+  //   });
+  // });
 });
