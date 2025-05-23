@@ -5,6 +5,126 @@
    Toast Notification Style
    =============================== */
 
+
+ /* =====================
+   Group Notification
+===================== */
+.group-popup {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: linear-gradient(135deg, #d0f0fd, #83d0f2);
+  color: #064663;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  max-width: 360px;
+  font-weight: 500;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeSlideIn 0.4s ease forwards;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.group-popup.show {
+  display: flex;
+}
+
+#group-message {
+  flex: 1;
+}
+
+.join-group-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #064663;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.join-group-btn:hover {
+  background-color: #05344e;
+}
+
+/* =====================
+   Deal Notification
+===================== */
+.deal-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #fff2e0, #ffd6b3);
+  color: #333;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  max-width: 380px;
+  font-weight: 500;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  animation: fadeSlideIn 0.4s ease forwards;
+}
+
+.deal-popup.show {
+  display: flex;
+}
+
+.deal-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.deal-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+#deal-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#deal-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cc5500;
+}
+
+#deal-location {
+  font-size: 13px;
+  color: #666;
+}
+
+.view-deal-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 12px;
+  background-color: #cc5500;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-deal-btn:hover {
+  background-color: #a23d00;
+}
+
+/* =====================
+   Default Notification (Optional/Legacy)
+===================== */
 .notification-popup {
   position: fixed;
   top: 20px;
@@ -32,6 +152,9 @@
   flex: 1;
 }
 
+/* =====================
+   Shared Close Button
+===================== */
 .close-btn {
   background: none;
   border: none;
@@ -47,6 +170,9 @@
   color: #000;
 }
 
+/* =====================
+   Animation
+===================== */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
