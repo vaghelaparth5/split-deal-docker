@@ -30,7 +30,7 @@ window.onload = function () {
         img.src = data.deal.image_url || "https://via.placeholder.com/60"; // fallback
         title.textContent = data.deal.title;
         price.textContent = `₹${data.deal.price} (was ₹${data.deal.original_price})`;
-        location.textContent = data.deal.location ? `📍 ${data.deal.location}` : "";
+        location.textContent = data.deal.location ? ` ${data.deal.location}` : "";
         viewBtn.href = `/views/dealsDetails.html?id=${data.deal._id}`;
 
         popup.classList.add("show");
