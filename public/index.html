@@ -7,6 +7,7 @@
   <title>Deal Details</title>
   <link rel="stylesheet" href="./css/styles.css" />
 
+   </head>
   <style>
     .notification-popup {
       position: fixed;
@@ -50,10 +51,20 @@
             <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
             <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
             <li class="header__el"><a href="#" class="header__link">About Us</a></li>
-            <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profile.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
+    
 
       <div id="deal-notification" class="deal-popup">
         <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
@@ -63,7 +74,7 @@
           <span id="deal-location"></span><br />
           <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
         </div>
-        <button id="close-notification" class="close-btn">×</button>
+        <button id="close-notification" class="close-btn">x</button>
       </div>
     </div>
   </header>
@@ -85,44 +96,106 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="site">
-            <h1 class="site__title">Share and Receive the Best Deals In Your Area!</h1>
-            <h2 class="site__subtitle">Connect with others to unlock the power of group buying—pool together!</h2>
-            <div class="site__box-link">
-              <a class="btn btn--width" href="./views/dealsDetails.html">Search Deals</a>
-            </div>
-            <img class="site__img" src="https://i.ibb.co/9m97Kgz8/Flinder-Street-Mockup.jpg"
-              alt="Flinder Street Mockup">
+      <div class="site">
+        <h1 class="site__title">Share and Recieve the Best Deals In Your Area!</h1>
+        <h2 class="site__subtitle">Connect with others to unlock the power of group buying—pool together!</h2>
+        <div class="buttonscontainer">
+          <div class="">
+            <a class="btn" href="./views/grouplisting.html">Join Deals</a>
           </div>
-        </div>
+          <div class="">
+            <a class="btn" href="./views/dealsDetails.html">Create Deals</a>
+          </div>
+      </div>
         <img class="site__img" src="./images/mockup.jpg">
       </div>
     </div>
   </div>
+
+  <div class="contentcontainer">
+
+    <section>
+      <img id="elephants" class="elephants" height="350" src="https://i.ibb.co/FF9dbtp/image.png" alt="">
+      <h1>Welcome to SplitDeals</h1>
+      <p>SplitDeals is your smarter way to split expenses with friends, family, and flatmates. Whether you're out dining, shopping, or traveling — we make it effortless to track, split, and settle shared bills.</p>
+      <p>No more awkward reminders or messy spreadsheets. Just smooth, simple, and fair splitting — every time.</p>
+    </section>
+  
+    <section style="background: black; color: white;">
+      <img id="orion" class="orion" src="https://imgs.search.brave.com/XsQ_X4Fsp7yxIYrrsUwBcPCV_v-ubfiMSYQaFLRmUMQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvNy9EZWFs/LVRyYW5zcGFyZW50/LUJhY2tncm91bmQu/cG5n" alt="">
+      <h1>Why SplitDeals?</h1>
+      <p>We’re built for the modern social lifestyle. Automatic calculations, real-time updates, and transparent logs keep everyone on the same page. Powered by clean UI and a secure backend, SplitDeals makes money management easier than ever.</p>
+    </section>
+  
+    <section>
+      <img id="tree" class="tree" height="300" src="https://imgs.search.brave.com/gOLzj33fRMt4tcDJa6K7qUBhuAZH6e7FWJZdgItMCvE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTMvMzAt/RGlzY291bnQtUE5H/LUltYWdlLnBuZw" alt="">
+      <h1>Perfect for Every Occasion</h1>
+      <p>From weekend getaways to grocery runs or monthly rent sharing — SplitDeals adapts to every group and every situation. Add expenses, split by percentages, items, or custom rules — you're always in control.</p>
+      <p>Built with a mission to reduce friction and make shared spending transparent, SplitDeals helps you focus on what really matters — enjoying the moment.</p>
+    </section>
+  
   </div>
+  
+  <div class="section">
+    <div class="grid">
+      <div class="image-container">
+        <img src="https://imgs.search.brave.com/tIIz035T5wvpJiMauD30ck0jkokeyApJ9GyAMnLlrH4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc2ltcGxldmll/d2luYy5jb20vc2lt/cGxldmlldy9pbWFn/ZS91cGxvYWQvY19m/aWxsLGhfODAxLHFf/NzUsd18xMjAwL3Yx/L2NsaWVudHMvZm9y/dHdheW5lLXJlZGVz/aWduLzIwMjNfVkZX/X1ZlcmFfQnJhZGxl/eV9PdXRsZXRfU2Fs/ZV8wMV8xX185Mzcx/MThmYy03MzJkLTQ4/NjUtYTFhYS04ZmE3/MmI2Mjg2MDYuanBn" alt="SplitDeals About">
+      </div>
+
+      <div class="text-content">
+        <p class="highlight">Who we are</p>
+        <h1 class="main-title">Our competitive advantage</h1>
+        <p>
+          At SplitDeals, we aim to redefine the way people shop, save, and share. Our platform combines the convenience of online group deals with the simplicity of splitting costs with friends or strangers nearby.
+          <br><br>
+          Whether you're looking to grab the best offers or just save more by teaming up, our smart platform is designed to make the experience <a href="#">seamless</a> and social.
+        </p>
+
+
+      </div>
+    </div>
   </div>
 
-  <!-- JS Dependencies -->
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="./js/mainSocket.js"></script>
 
-  <!-- Your Page Scripts -->
-  <script src="/js/dealDetails.js"></script>
+  <!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+    </div>
 
-  <!-- Optional: Tawk.to Chat -->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script");
-      s1.src = "https://embed.tawk.to/682c975835b0fb19122c68a6/1irn2ud71";
-      s1.async = true;
-      s1.onload = () => console.log("Tawk.to loaded!");
-      document.body.appendChild(s1);
-    })();
-  </script>
+    <div class="footer-text">
+      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
+      <p>© 2025 IT Labs.</p>
+    </div>
+
+   
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
+
+
+  <!-- <script src="/js/index.js"></script> -->
+  <!--Start of Tawk.to Script-->
+
+<!-- Tawk.to minimal working version -->
+
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script");
+    s1.src = "https://embed.tawk.to/682c975835b0fb19122c68a6/1irn2ud71";
+    s1.async = true;
+    s1.onload = () => console.log("Tawk.to loaded!");
+    document.body.appendChild(s1);
+  })();
+</script>
 
   <script type="application/javascript"></script>
 
-</body>
+<script src="/js/auth.js"></script>
+
+  <!--End of Tawk.to Script-->
+  </body>
 
 </html>

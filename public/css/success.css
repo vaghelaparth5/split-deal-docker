@@ -122,3 +122,55 @@
       transform: scale(1.09);
     }
   }
+
+  .footer {
+    padding: 40px 20px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 85rem;
+    margin: 0 auto;
+  }
+  
+  .brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+  }
+  
+  .footer-text p {
+    color: #6b7280;
+    margin: 5px 0;
+  }
+  
+  .footer-link {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  
+  .social-icons {
+    margin-top: 15px;
+  }
+  
+  .social-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    border-radius: 50%;
+    color: #6b7280;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .social-btn:hover {
+    background-color: #f3f4f6;
+  }
+  

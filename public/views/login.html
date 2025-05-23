@@ -2,10 +2,48 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/login.css">
+  <style>
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+    .profile-icon {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #555;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+    }
+    .dropdown a:hover {
+      background: #f0f0f0;
+    }
+  </style>
   <link rel="stylesheet" href="./css/styles.css" />
 
 </head>
@@ -13,17 +51,26 @@
 <body>
   <header class="header">
     <div class="container header__container">
-      <div class="header__logo"><img class="header__img" src="./images/split-deal-logo.png" height="40" width="170">
+      <div class="header__logo">
+        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170" />
         <h1 class="header__title"></h1>
       </div>
-
       <div class="header__menu">
         <nav id="navbar" class="header__nav collapse">
           <ul class="header__elenco">
             <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
             <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
             <li class="header__el"><a href="#" class="header__link">About Us</a></li>
-            <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profile.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
@@ -42,11 +89,10 @@
         </div>
       </div>
 
-      <!-- Email -->
       <div class="flex-column field-group">
         <label>Email</label>
         <div class="inputForm">
-          <input type="name" id="email" class="input" placeholder="Enter your Email" required />
+          <input type="email" id="email" class="input" placeholder="Enter your Email" required />
         </div>
       </div>
 
@@ -72,35 +118,27 @@
       </div>
 
       <button type="submit" class="button-submit" id="submitBtn">Sign In</button>
-
       <p class="p">
         <span id="toggleText">Don't have an account?</span>
         <span class="span" id="toggleLink">Sign Up</span>
       </p>
     </form>
   </div>
-  <!-- 🛍️ Deal Notification (Shared across all pages) -->
-  <div id="deal-notification" class="deal-popup">
-    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
-    <div class="deal-text">
-      <strong id="deal-title"></strong><br />
-      <span id="deal-price"></span><br />
-      <span id="deal-location"></span><br />
-      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+    <!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
     </div>
-    <button id="close-notification" class="close-btn">×</button>
-  </div>
 
-  <!-- 👥 Group Notification (Shared across all pages) -->
-  <div id="group-notification" class="group-popup">
-    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
-    <div class="group-text">
-      <strong id="group-title"></strong><br />
-      <span id="group-members"></span><br />
-      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    <div class="footer-text">
+      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
+      <p>© 2025 IT Labs.</p>
     </div>
-    <button id="close-group" class="close-btn">×</button>
+
+   
   </div>
+</footer>
   <script src="/js/auth.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/mainSocket.js"></script>

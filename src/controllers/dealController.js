@@ -63,14 +63,41 @@ exports.expireDeals = async (req, res) => {
   try {
     const now = new Date();
 
-    const expiredDeals = await Deal.updateMany(
-      { deadline: { $lt: now }, is_active: true },
+    // Find deals that will be expired
+    const dealsToExpire = await Deal.find({
+      deadline: { $lt: now },
+      is_active: true
+    });
+
+    if (dealsToExpire.length === 0) {
+      return res.status(200).json({ msg: "No deals to expire", modifiedCount: 0 });
+    }
+
+    // Expire them
+    await Deal.updateMany(
+      { _id: { $in: dealsToExpire.map((d) => d._id) } },
       { is_active: false }
     );
 
+    // Emit for each expired deal
+    const io = req.app.get("io");
+    if (io) {
+      dealsToExpire.forEach((deal) => {
+        io.emit("deal_expired", {
+          msg: "A deal has expired!",
+          deal: {
+            _id: deal._id,
+            title: deal.title,
+            image_url: deal.image_url,
+            deadline: deal.deadline,
+          },
+        });
+      });
+    }
+
     res.status(200).json({
       msg: "Expired deals updated successfully",
-      modifiedCount: expiredDeals.modifiedCount
+      modifiedCount: dealsToExpire.length
     });
   } catch (error) {
     res.status(500).json({ msg: "Server Error", error });
