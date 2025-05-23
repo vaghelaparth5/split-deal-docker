@@ -75,50 +75,43 @@
   </div>
 
   <!-- Create Deal Modal -->
+<!-- Update the modal form in your HTML -->
 <div id="createDealModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2>Create New Deal</h2>
-    <form id="dealForm">
+    <h2>Create New Group</h2>
+    <form id="groupForm">
       <div class="form-group">
-        <label for="dealTitle">Title</label>
-        <input type="text" id="dealTitle" name="title" value="Superdry Winter Sale" required>
+        <label for="groupTitle">Group Title</label>
+        <input type="text" id="groupTitle" name="title" required>
       </div>
       <div class="form-group">
-        <label for="dealDescription">Description</label>
-        <textarea id="dealDescription" name="description" rows="3">Get this exclusive deal on Superdry products!</textarea>
+        <label for="groupDescription">Description</label>
+        <textarea id="groupDescription" name="description" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dealTitle">Deal Title</label>
+        <input type="text" id="dealTitle" name="dealTitle" required>
       </div>
       <div class="price-group">
         <div class="form-group">
-          <label for="dealPrice">Price ($)</label>
-          <input type="number" id="dealPrice" name="price" required>
+          <label for="price">Current Price ($)</label>
+          <input type="number" id="price" name="price" required>
         </div>
         <div class="form-group">
-          <label for="dealOriginalPrice">Original Price ($)</label>
-          <input type="number" id="dealOriginalPrice" name="original_price" required>
+          <label for="original_price">Original Price ($)</label>
+          <input type="number" id="original_price" name="original_price" required>
         </div>
       </div>
       <div class="form-group">
-        <label for="dealDeadline">Deadline</label>
-        <input type="datetime-local" id="dealDeadline" name="deadline" value="2025-05-26T02:10" required>
+        <label for="deadline">Deadline</label>
+        <input type="datetime-local" id="deadline" name="deadline" required>
       </div>
       <div class="form-group">
-        <label for="dealLocation">Location</label>
-        <input type="text" id="dealLocation" name="location" value="Convention Centre Pl, South Wharf">
+        <label for="max_participants">Max Participants</label>
+        <input type="number" id="max_participants" name="max_participants" required>
       </div>
-      <div class="form-group">
-        <label for="dealMaxParticipants">Max Participants</label>
-        <input type="number" id="dealMaxParticipants" name="max_participants" required>
-      </div>
-      <div class="form-group">
-        <label for="dealCategory">Category</label>
-        <input type="text" id="dealCategory" name="category">
-      </div>
-      <div class="form-group">
-        <label for="dealImage">Image URL</label>
-        <input type="text" id="dealImage" name="image_url">
-      </div>
-      <button type="submit" class="submit-btn">Create Deal</button>
+      <button type="submit" class="submit-btn">Create Group</button>
     </form>
   </div>
 </div>
