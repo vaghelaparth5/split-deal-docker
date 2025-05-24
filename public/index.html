@@ -101,18 +101,32 @@
         <h2 class="site__subtitle">Connect with others to unlock the power of group buying—pool together!</h2>
         <div class="buttonscontainer">
           <div class="">
-            <a class="btn" href="./views/grouplisting.html">Join Deals</a>
+            <a class="btn padding-button" href="./views/grouplisting.html">Join Deals</a>
           </div>
           <div class="">
-            <a class="btn" href="./views/dealsDetails.html">Create Deals</a>
+            <a class="btn padding-button" href="./views/dealsDetails.html">Create Deals</a>
           </div>
       </div>
-        <img class="site__img" src="./images/mockup.jpg">
+        <!-- <img class="site__img" src="./images/mockup.jpg"> -->
+         <!-- Add this in your main content section -->
+<section class="swiper-section">
+  <h2>Featured Deals</h2>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <!-- Slides will be added dynamically by JavaScript -->
+    </div>
+    <!-- Navigation buttons -->
+    <button class="swiper-button-prev">❮</button>
+    <button class="swiper-button-next">❯</button>
+    <!-- Pagination dots -->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
       </div>
     </div>
   </div>
 
-  <div class="contentcontainer">
+  <!-- <div class="contentcontainer">
 
     <section>
       <img id="elephants" class="elephants" height="350" src="https://i.ibb.co/FF9dbtp/image.png" alt="">
@@ -134,9 +148,9 @@
       <p>Built with a mission to reduce friction and make shared spending transparent, SplitDeals helps you focus on what really matters — enjoying the moment.</p>
     </section>
   
-  </div>
+  </div> -->
   
-  <div class="section">
+  <!-- <div class="section">
     <div class="grid">
       <div class="image-container">
         <img src="https://imgs.search.brave.com/tIIz035T5wvpJiMauD30ck0jkokeyApJ9GyAMnLlrH4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc2ltcGxldmll/d2luYy5jb20vc2lt/cGxldmlldy9pbWFn/ZS91cGxvYWQvY19m/aWxsLGhfODAxLHFf/NzUsd18xMjAwL3Yx/L2NsaWVudHMvZm9y/dHdheW5lLXJlZGVz/aWduLzIwMjNfVkZX/X1ZlcmFfQnJhZGxl/eV9PdXRsZXRfU2Fs/ZV8wMV8xX185Mzcx/MThmYy03MzJkLTQ4/NjUtYTFhYS04ZmE3/MmI2Mjg2MDYuanBn" alt="SplitDeals About">
@@ -154,22 +168,94 @@
 
       </div>
     </div>
+  </div> -->
+
+
+  <!-- Interactive Cards Section -->
+<!-- Interactive Cards Section -->
+<section class="interactive-cards">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Group Deal">
+    <div class="card-overlay">
+      <h3>Group Deal</h3>
+      <p>Get discounts when shopping in groups. Save more!</p>
+    </div>
   </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Student Offer">
+    <div class="card-overlay">
+      <h3>Student Offer</h3>
+      <p>Special prices for Deakin Uni students. Limited time only!</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Weekly Pick">
+    <div class="card-overlay">
+      <h3>Weekly Pick</h3>
+      <p>This week's top pick from our best deals. Don’t miss it!</p>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+  <div class="about-content">
+    <h2>Why SplitDeal?</h2>
+    <p>
+      At <strong>SplitDeal</strong>, we believe shopping should be smarter, not costlier.
+      Built with the student community of <strong>Deakin University</strong> in mind, our platform unlocks exclusive group discounts on everyday essentials, tech, fashion, and more.
+    </p>
+    <p>
+      Whether you're furnishing your new flat, gearing up for the semester, or just looking to save a little extra, SplitDeal helps you and your friends combine your power — and your wallets — to access deals you won’t find anywhere else.
+    </p>
+    <p>
+      Think group buying, reimagined. Think <span class="highlight">Split. Save. Smile.</span>
+    </p>
+  </div>
+</section>
+
+
 
 
   <!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-container">
-    <div>
-      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
+      </div>
     </div>
-
-    <div class="footer-text">
-      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-      <p>© 2025 IT Labs.</p>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
-
-   
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
   </div>
 </footer>
 <!-- ========== END FOOTER ========== -->
@@ -194,6 +280,8 @@
   <script type="application/javascript"></script>
 
 <script src="/js/auth.js"></script>
+<script src="/js/swiper.js"></script>
+<script src="/js/global.js"></script>
 
   <!--End of Tawk.to Script-->
   </body>

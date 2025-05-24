@@ -7,27 +7,77 @@
   <title>User Profile & Deals</title>
   <link rel="stylesheet" href="../css/profilepage.css">
   <link rel="stylesheet" href="./css/styles.css" />
+  <script src="../js/loadFooter.js"></script>
+  <style>
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+    .profile-icon {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #555;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+    }
+    .dropdown a:hover {
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 
 <body>
     <header class="header">
-        <div class="container header__container">
-      <div class="header__logo"><img class="header__img" src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" height="40" width="170"> <h1 class="header__title"></h1></div> 
-           
-        
-        <div class="header__menu">
-          <nav id="navbar" class="header__nav collapse">
-            <ul class="header__elenco">
-              <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
-              <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-              <li class="header__el"><a href="/views/aboutus.html" class="header__link">About Us</a></li>
-              <li class="header__el"><a href="/views/login.html" class="header__link">Login</a></li>
-              <li class="header__el"><a href="/views/profilepage.html" class="header__link">Profile</a></li>
-            </ul>
-          </nav>
-        </div>
-          </div>
-      </header>
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el">
+              <a href="/index.html" class="header__link">Home</a>
+            </li>
+            <li class="header__el">
+              <a href="/views/dealsDetails.html" class="header__link">Deals</a>
+            </li>
+            <li class="header__el">
+              <a href="#" class="header__link">About Us</a>
+            </li>
+            <li class="header__el" id="loginMenuItem">
+              <a href="/views/login.html" class="header__link">Login</a>
+            </li>
+            <li class="header__el" id="profileMenu" style="display: none">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profilepage.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
   <main class="main-grid">
     <!-- left column: profile -->
@@ -135,6 +185,7 @@
     </div>
   </footer>
   <script src="/js/profile.js"></script>
+  <script src="/js/auth.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/mainSocket.js"></script>
 </body>
