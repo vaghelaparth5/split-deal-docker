@@ -1,9 +1,12 @@
 const axios = require('axios');
 const { google } = require('googleapis');
+const serviceAccount = require('../config/googleServiceAccount'); // Load credentials from .js file
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: './src/config/googleServiceAccount.js',
+  credentials: serviceAccount, // ✅ Use credentials instead of keyFile
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
+
 
 const SPREADSHEET_ID = '1Gxtwa1_iugpBHDslg5WrKVRg04Z0Mx8UsMRoqYd0DhI';
 
