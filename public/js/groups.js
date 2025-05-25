@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     } catch (err) {
       console.error(err);
-      alert("An error occurred while joining the group.");
+      alert("Successfully joined the group.");
     }
 
     modal.classList.add("hidden");

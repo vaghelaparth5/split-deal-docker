@@ -215,9 +215,9 @@ body {
   display: block;
 }
 
-.sect--grey {
-  /*background-color: #ebeff9;*/
-}
+ .sect--grey {
+  background-color: #ebeff9;
+} 
 
 .sect--violet {
   background-color: #6f79ff;
@@ -231,9 +231,9 @@ body {
   padding-top: 50px;
 }
 
-.sect--white {
-  /* background-color:#fff;*/
-}
+/* .sect--white {
+  background-color:#fff;
+} */
 .row--center {
   max-width: 1000px;
   margin: 0 auto;
@@ -483,9 +483,6 @@ body {
 .item__img {
   width: 25px;
   margin-right: 10px;
-}
-
-.carousel {
 }
 
 .row__carousel {
