@@ -3,77 +3,74 @@ let deals = []; // Will be populated from API
 const dealGrid = document.getElementById("dealGrid");
 const brandFilter = document.getElementById("brandFilter");
 const searchInput = document.getElementById("searchInput");
-const modal = document.getElementById("createDealModal");
+const modal = document.getElementById("createGroupModal");
 const closeBtn = document.querySelector(".close");
 const dealForm = document.getElementById("dealForm");
 
 // Update the openGroupModal function
+// Function to open group creation modal
 function openModal(dealData) {
-  // Clear any existing values
-  document.getElementById("groupForm").reset();
-
-  // If we're creating a group from an existing deal, pre-fill some fields
+  // Pre-fill fields if coming from a deal
   if (dealData) {
-    document.getElementById("dealTitle").value = dealData.title || "";
-    document.getElementById("price").value = dealData.price || "";
-    document.getElementById("original_price").value =
-      dealData.original_price || "";
-    document.getElementById("deadline").value = dealData.deadline
-      ? new Date(dealData.deadline).toISOString().slice(0, 16)
-      : "";
-    document.getElementById("max_participants").value =
-      dealData.max_participants || 5;
+    document.getElementById('dealId').value = dealData._id || '';
+    document.getElementById('dealTitle').value = dealData.title || '';
+    document.getElementById('dealDescription').value = dealData.description || '';
+    document.getElementById('totalValue').value = dealData.price || '';
+    document.getElementById('discount').value = 
+      Math.round(((dealData.original_price - dealData.price) / dealData.original_price) * 100) || '';
+    document.getElementById('expiryDate').value = 
+      dealData.deadline ? new Date(dealData.deadline).toISOString().slice(0, 16) : '';
+    document.getElementById('membersRequired').value = dealData.max_participants || 5;
+    document.getElementById('dealLogo').value = dealData.image_url || '';
   }
+  
+  modal.style.display = 'block';
+}
 
-  modal.style.display = "block";
-
-  // Update the form submission handler
-if (document.getElementById("groupForm")) {
-  document.getElementById("groupForm").addEventListener("submit", async (e) => {
+// Form submission handler
+if (document.getElementById('groupForm')) {
+  document.getElementById('groupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = {
-      title: document.getElementById("groupTitle").value,
-      description: document.getElementById("groupDescription").value,
-      dealTitle: document.getElementById("dealTitle").value,
-      price: parseFloat(document.getElementById("price").value),
-      original_price: parseFloat(
-        document.getElementById("original_price").value
-      ),
-      deadline: document.getElementById("deadline").value,
-      max_participants: parseInt(
-        document.getElementById("max_participants").value
-      ),
+      dealId: document.getElementById('dealId').value,
+      dealLogo: document.getElementById('dealLogo').value,
+      dealTitle: document.getElementById('dealTitle').value,
+      dealDescription: document.getElementById('dealDescription').value,
+      storeName: document.getElementById('storeName').value,
+      storeLocation: document.getElementById('storeLocation').value,
+      totalValue: parseFloat(document.getElementById('totalValue').value),
+      discount: parseFloat(document.getElementById('discount').value),
+      expiryDate: document.getElementById('expiryDate').value,
+      membersRequired: parseInt(document.getElementById('membersRequired').value),
+      receiptImage: document.getElementById('receiptImage').value,
+      status: "active" // Default status
     };
 
-    console.log("Form Data:", formData);
-
     try {
-      const response = await fetch("http://localhost:3000/api/deal/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      const response = await fetch('http://localhost:3000/api/group/create-group', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {
         closeModal();
-        alert("Group created successfully!");
+        showGroupCreationNotification();
+        // alert('Group deal created successfully!');
       } else {
         const errorData = await response.json();
-        console.error("Error:", errorData.message || "Failed to create group");
-        alert(
-          "Failed to create group: " + (errorData.message || "Please try again")
-        );
+        console.error('Error:', errorData);
+        alert(`Failed to create group: ${errorData.message || 'Please try again'}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Network error. Please try again.");
+      console.error('Error:', error);
+      alert('Network error. Please try again.');
     }
   });
-}
 }
 
 
@@ -108,29 +105,64 @@ function renderDeals(filteredDeals) {
     return;
   }
 
+  // filteredDeals.forEach((deal) => {
+  //   const card = document.createElement("div");
+  //   card.className = "deal-card";
+  //   card.innerHTML = `
+  //     <img src="${deal.image_url || "https://via.placeholder.com/150"}" alt="${
+  //     deal.title
+  //   }" />
+  //     <h3>${deal.title}</h3>
+  //     <p>${deal.description || ""}</p>
+  //     <p>${deal.location || "Location not specified"}</p>
+  //     <p><strong>Price:</strong> $${deal.price} <s>$${
+  //     deal.original_price
+  //   }</s></p>
+  //     <p><strong>Expiry:</strong> ${new Date(
+  //       deal.deadline
+  //     ).toLocaleDateString()}</p>
+  //     <button class="create-deal-btn">Create Group 🚀</button>
+  //   `;
+  //   dealGrid.appendChild(card);
+
+  //   const button = card.querySelector(".create-deal-btn");
+  //   button.addEventListener("click", () => openModal(deal));
+  // });
+
   filteredDeals.forEach((deal) => {
     const card = document.createElement("div");
     card.className = "deal-card";
+    
+    // Add expired class if deal is expired
+    if (new Date(deal.deadline) < new Date()) {
+        card.classList.add("expired");
+    }
+    
     card.innerHTML = `
-      <img src="${deal.image_url || "https://via.placeholder.com/150"}" alt="${
-      deal.title
-    }" />
-      <h3>${deal.title}</h3>
-      <p>${deal.description || ""}</p>
-      <p>${deal.location || "Location not specified"}</p>
-      <p><strong>Price:</strong> $${deal.price} <s>$${
-      deal.original_price
-    }</s></p>
-      <p><strong>Expiry:</strong> ${new Date(
-        deal.deadline
-      ).toLocaleDateString()}</p>
-      <button class="create-deal-btn">Create Group 🚀</button>
+      ${deal.weekend_only ? '<span class="weekend-tag">Weekend Only</span>' : ''}
+      <img src="${deal.image_url || 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" alt="${deal.title}" />
+      <div class="card-content">
+        <h3>${deal.title}</h3>
+        <p>${deal.description || ''}</p>
+        
+        <div class="deal-meta">
+          <p class="location">${deal.location || 'Location not specified'}</p>
+          <p><span class="price">$${deal.price}</span> <span class="original-price"><s>$${deal.original_price}</s></span></p>
+          <p class="expiry">${new Date(deal.deadline).toLocaleDateString()}</p>
+        </div>
+        
+        <button class="create-deal-btn">
+          <span>Create Group</span>
+          <span>🚀</span>
+        </button>
+      </div>
     `;
+    
     dealGrid.appendChild(card);
 
     const button = card.querySelector(".create-deal-btn");
     button.addEventListener("click", () => openModal(deal));
-  });
+});
 }
 
 function applyFilters() {
@@ -183,6 +215,89 @@ if (brandFilter && searchInput) {
 function add(a, b) {
   return a + b;
 }
+
+// Function to show the notification
+function showGroupCreationNotification() {
+  const notification = document.getElementById('groupCreationNotification');
+  const viewGroupBtn = document.getElementById('viewGroupBtn');
+  
+  // Set up the button to navigate to the group page
+  viewGroupBtn.addEventListener('click', () => {
+    window.location.href = `/groupslisting.html`; // Adjust this URL to your actual group page route
+  });
+  
+  // Show the notification
+  notification.classList.add('show');
+  
+  // Auto-hide after 5 seconds (optional)
+  setTimeout(() => {
+    notification.classList.remove('show');
+    notification.classList.add('hide');
+    
+    // Remove the hide class after animation completes
+    setTimeout(() => {
+      notification.classList.remove('hide');
+    }, 500);
+  }, 5000);
+}
+
+document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const emailInput = document.getElementById('subscribeEmail');
+  const messageElement = document.getElementById('subscriptionMessage');
+  const email = emailInput.value.trim();
+  
+  // Reset message
+  messageElement.textContent = '';
+  messageElement.className = 'subscription-message';
+  
+  // Validate email
+  if (!validateEmail(email)) {
+    messageElement.textContent = 'Please enter a valid email address';
+    messageElement.classList.add('error');
+    return;
+  }
+  
+  // Simulate sending email (in a real app, you would make an API call here)
+  simulateEmailSend(email)
+    .then(() => {
+      messageElement.textContent = 'Thank you for subscribing! You will receive updates on upcoming deals.';
+      messageElement.classList.add('success');
+      emailInput.value = ''; // Clear the input
+      
+      // Reset message after 5 seconds
+      setTimeout(() => {
+        messageElement.textContent = '';
+        messageElement.className = 'subscription-message';
+      }, 5000);
+    })
+    .catch(error => {
+      messageElement.textContent = 'Something went wrong. Please try again later.';
+      messageElement.classList.add('error');
+      console.error('Subscription error:', error);
+    });
+});
+
+// Email validation function
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+// Simulate email sending (replace with actual API call in production)
+function simulateEmailSend(email) {
+  return new Promise((resolve) => {
+    // In a real application, you would make an API call here
+    console.log(`Email would be sent to: ${email}`);
+    
+    // Simulate network delay
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
+}
+
 
 module.exports = {
   deals,
