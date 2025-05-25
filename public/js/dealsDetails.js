@@ -24,6 +24,23 @@ const token = localStorage.authToken;
   profileIcon.textContent = name[0].toUpperCase();
 }
 
+// Show/hide dropdown
+if (profileIcon) {
+  profileIcon.addEventListener("click", () => {
+    profileDropdown.style.display =
+      profileDropdown.style.display === "block" ? "none" : "block";
+  });
+}
+
+// Logout functionality
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userName");
+    window.location.href = "/views/login.html";
+  });
+}
+
 // Update the openGroupModal function
 // Function to open group creation modal
 function openModal(dealData) {
