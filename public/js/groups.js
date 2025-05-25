@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!selectedDeal) return;
 
     try {
-      const res = await fetch(`/api/group/join-group/${selectedDeal.dealId}`, {
+      const res = await fetch(`/api/groupMember/create-team-member/${selectedDeal.dealId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       });
 
