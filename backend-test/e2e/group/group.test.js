@@ -151,6 +151,26 @@ describe("Group API - E2E Tests", () => {
             expect(res.body.msg).to.equal("Group deleted successfully");
         });
     });
+    describe("GET /api/group/get-group/:id", () => {
+        it("should return group by ID", async () => {
+            const group = await Group.create({
+                dealId: new Date().getTime().toString(),
+                dealLogo: "logo",
+                dealTitle: "One Group",
+                dealDescription: "desc",
+                storeName: "Test",
+                storeLocation: "City",
+                totalValue: 123,
+                discount: 12,
+                expiryDate: new Date(),
+                membersRequired: 3
+            });
+
+            const res = await request(app).get(`/api/group/get-group/${group._id}`);
+            expect(res.status).to.equal(200);
+            expect(res.body.dealTitle).to.equal("One Group");
+        });
+    });
 
 
 
