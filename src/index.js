@@ -15,6 +15,8 @@ const io = new Server(server, {
 });
 app.set("io", io);
 
+initializeSocket(io); // call socket setup
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/splitdeal')
   .then(() => {
