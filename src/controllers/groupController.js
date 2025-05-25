@@ -55,15 +55,27 @@ exports.updateGroupStatus = async (req, res) => {
     const group = await Group.findByIdAndUpdate(
       id,
       { status },
-      { new: true } // Return the updated document
+      { new: true }
     );
+
     if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    //  Emit socket event
+    const io = req.app.get("io");
+    if (io) {
+      io.emit("group-status-updated", {
+        groupId: group._id,
+        newStatus: group.status,
+        title: group.dealTitle
+      });
+    }
 
     res.json({ msg: "Group status updated successfully", group });
   } catch (error) {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
 exports.getAllGroups = async (req, res) => {
   try {
     const groups = await Group.find();
@@ -128,17 +140,24 @@ exports.updateMembersRequired = async (req, res) => {
     const { id } = req.params;
     const { membersRequired } = req.body;
 
-    if (!membersRequired || membersRequired < 1) {
+    // Check if it's a number and >= 1
+    if (
+      membersRequired === undefined ||
+      isNaN(membersRequired) ||
+      Number(membersRequired) < 1
+    ) {
       return res.status(400).json({ msg: "Valid membersRequired value is required" });
     }
 
     const group = await Group.findByIdAndUpdate(
       id,
-      { membersRequired },
-      { new: true } // Return the updated document
+      { membersRequired: Number(membersRequired) },
+      { new: true }
     );
 
-    if (!group) return res.status(404).json({ msg: "Group not found" });
+    if (!group) {
+      return res.status(404).json({ msg: "Group not found" });
+    }
 
     res.json({ msg: "Members required updated successfully", group });
   } catch (error) {

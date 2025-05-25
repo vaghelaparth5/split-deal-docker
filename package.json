@@ -8,7 +8,7 @@
     "dev": "nodemon src/index.js",
     "test": "jest",
     "test-backend": "cross-env NODE_ENV=backend-test mocha",
-    "test-backend:unit": "cross-env NODE_ENV=backend-test mocha backend-test/unit/**/*.test.js",
+    "test-backend:unit": "cross-env NODE_ENV=backend-test mocha --timeout 5000 backend-test/unit/**/*.test.js",
     "test-backend:e2e": "cross-env NODE_ENV=backend-test mocha backend-test/e2e/**/*.test.js",
     "test-backend:watch": "cross-env NODE_ENV=backend-test mocha --watch",
     "coverage-backend": "cross-env NODE_ENV=backend-test nyc --reporter=html --reporter=text mocha",

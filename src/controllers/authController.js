@@ -85,15 +85,24 @@ exports.forgotPassword = async (req, res) => {
     // Construct reset URL
     const resetURL = `${process.env.FRONTEND_URL}/reset-password/${token}`;
 
-    // Email options
+    // ✅ Move transporter inside the function so it can be stubbed
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: +process.env.SMTP_PORT,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
     const mailOptions = {
       to: user_email,
       from: process.env.SMTP_FROM || 'no-reply@yourapp.com',
       subject: 'Password Reset Request',
       text: `You requested a password reset.\n\n` +
-            `Please click the link below (or copy/paste into your browser) to reset your password:\n\n` +
-            `${resetURL}\n\n` +
-            `If you did not request this, please ignore this email.`,
+        `Please click the link below (or copy/paste into your browser) to reset your password:\n\n` +
+        `${resetURL}\n\n` +
+        `If you did not request this, please ignore this email.`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -104,34 +113,35 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-// RESET PASSWORD: update with new password
 exports.resetPassword = async (req, res) => {
   try {
-    const { token } = req.params;
-    const { newPassword } = req.body;
+    const hashedToken = crypto.createHash('sha256')
+      .update(req.params.token)
+      .digest('hex');
 
-    // Hash incoming token
-    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-
-    // Find user by token and check expiry
     const user = await User.findOne({
       resetPasswordToken: hashedToken,
-      resetPasswordExpires: { $gt: Date.now() }
+      resetPasswordExpires: { $gt: Date.now() },
     });
-    if (!user) return res.status(400).json({ msg: "Invalid or expired token." });
 
-    // Hash and set the new password
+    if (!user) {
+      console.log(" Controller is returning 404 JSON");
+
+      return res
+        .status(404)
+        .type('application/json') // tell Supertest this is JSON explicitly
+        .send(JSON.stringify({ msg: 'Invalid or expired token.' }));
+    }
+
     const salt = await bcrypt.genSalt(10);
-    user.user_password = await bcrypt.hash(newPassword, salt);
-
-    // Clear reset fields
+    user.user_password = await bcrypt.hash(req.body.newPassword, salt);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
+
     await user.save();
 
-    res.json({ msg: "Password has been reset successfully." });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: "Server Error", error });
+    res.status(200).json({ msg: 'Password has been reset successfully.' });
+  } catch (err) {
+    res.status(500).json({ msg: 'Server error', error: err.message });
   }
 };

@@ -142,8 +142,167 @@ describe('Auth Controller - Unit Tests', () => {
     });
   });
 
-  // need unit test for forgot password 
+describe('forgotPassword', () => {
+  it('should send reset email when user exists', async () => {
+    req.body = { user_email: 'gauravmyana15@gmail.com' };
 
-  // need unit test for reset password
+    const fakeUser = {
+      user_email: 'gauravmyana15@gmail.com',
+      save: sinon.stub().resolves(),
+      resetPasswordToken: '',
+      resetPasswordExpires: '',
+    };
+
+    sandbox.stub(User, 'findOne').resolves(fakeUser);
+
+    const randomBytesStub = sandbox.stub(crypto, 'randomBytes').returns(Buffer.from('mocktoken'));
+    const createHashStub = sandbox.stub(crypto, 'createHash').returns({
+      update: () => ({
+        digest: () => 'hashedtoken123'
+      })
+    });
+
+    const sendMailStub = sinon.stub().resolves();
+    const createTransportStub = sandbox.stub(require('nodemailer'), 'createTransport').returns({
+      sendMail: sendMailStub
+    });
+
+    await authController.forgotPassword(req, res);
+
+    expect(User.findOne.calledWith({ user_email: 'gauravmyana15@gmail.com' })).to.be.true;
+    expect(fakeUser.save.calledOnce).to.be.true;
+    expect(sendMailStub.calledOnce).to.be.true;
+    expect(res.json.calledWithMatch({ msg: 'Password reset link sent to email.' })).to.be.true;
+
+    randomBytesStub.restore();
+    createHashStub.restore();
+    createTransportStub.restore();
+  });
+
+  it('should return 404 if user does not exist', async () => {
+    req.body = { user_email: 'nonexistent@example.com' };
+
+    sandbox.stub(User, 'findOne').resolves(null);
+
+    await authController.forgotPassword(req, res);
+
+    expect(res.status.calledWith(404)).to.be.true;
+    expect(res.json.calledWithMatch({ msg: 'No account with that email.' })).to.be.true;
+  });
+
+  it('should handle error when crypto.randomBytes fails', async () => {
+    req.body = { user_email: 'test@example.com' };
+
+    const fakeUser = {
+      user_email: 'test@example.com',
+      save: sinon.stub().resolves(),
+    };
+
+    sandbox.stub(User, 'findOne').resolves(fakeUser);
+
+    const randomBytesStub = sandbox.stub(crypto, 'randomBytes').throws(new Error('crypto failed'));
+
+    await authController.forgotPassword(req, res);
+
+    expect(res.status.calledWith(500)).to.be.true;
+
+    randomBytesStub.restore();
+  });
+
+  it('should handle error when user.save fails', async () => {
+    req.body = { user_email: 'test@example.com' };
+
+    const fakeUser = {
+      user_email: 'test@example.com',
+      save: sinon.stub().rejects(new Error('Save failed')),
+    };
+
+    sandbox.stub(User, 'findOne').resolves(fakeUser);
+
+    const randomBytesStub = sandbox.stub(crypto, 'randomBytes').returns(Buffer.from('mocktoken'));
+    const createHashStub = sandbox.stub(crypto, 'createHash').returns({
+      update: () => ({
+        digest: () => 'hashedtoken123'
+      })
+    });
+
+    await authController.forgotPassword(req, res);
+
+    expect(res.status.calledWith(500)).to.be.true;
+
+    randomBytesStub.restore();
+    createHashStub.restore();
+  });
+
+  it('should handle error when nodemailer.sendMail fails', async () => {
+    req.body = { user_email: 'test@example.com' };
+
+    const fakeUser = {
+      user_email: 'test@example.com',
+      save: sinon.stub().resolves(),
+    };
+
+    sandbox.stub(User, 'findOne').resolves(fakeUser);
+
+    const randomBytesStub = sandbox.stub(crypto, 'randomBytes').returns(Buffer.from('mocktoken'));
+    const createHashStub = sandbox.stub(crypto, 'createHash').returns({
+      update: () => ({
+        digest: () => 'hashedtoken123'
+      })
+    });
+
+    const sendMailStub = sinon.stub().rejects(new Error('SMTP failure'));
+    const createTransportStub = sandbox.stub(require('nodemailer'), 'createTransport').returns({
+      sendMail: sendMailStub
+    });
+
+    await authController.forgotPassword(req, res);
+
+    expect(res.status.calledWith(500)).to.be.true;
+
+    randomBytesStub.restore();
+    createHashStub.restore();
+    createTransportStub.restore();
+  });
+});
+
+
+  describe('resetPassword', () => {
+    it('should reset the password when token is valid', async () => {
+      req.params = { token: 'mocktoken' };
+      req.body = { newPassword: 'newpassword123' };
+
+      const fakeUser = {
+        user_password: '',
+        save: sinon.stub().resolves(),
+        resetPasswordToken: 'hashedtoken',
+        resetPasswordExpires: Date.now() + 3600000,
+      };
+
+      sandbox.stub(crypto, 'createHash').returns({ update: () => ({ digest: () => 'hashedtoken' }) });
+      sandbox.stub(User, 'findOne').resolves(fakeUser);
+      sandbox.stub(bcrypt, 'genSalt').resolves('salt');
+      sandbox.stub(bcrypt, 'hash').resolves('hashedPassword');
+
+      await authController.resetPassword(req, res);
+
+      expect(fakeUser.user_password).to.equal('hashedPassword');
+      expect(fakeUser.save.calledOnce).to.be.true;
+      expect(res.json.calledWithMatch({ msg: 'Password has been reset successfully.' })).to.be.true;
+    });
+
+    it('should handle server errors during password reset', async () => {
+      req.params = { token: 'token' };
+      req.body = { newPassword: 'pass' };
+
+      sandbox.stub(crypto, 'createHash').returns({ update: () => ({ digest: () => 'hashedtoken' }) });
+      sandbox.stub(User, 'findOne').throws(new Error('Reset error'));
+
+      await authController.resetPassword(req, res);
+
+      expect(res.status.calledWith(500)).to.be.true;
+    });
+  });
+
 
 });
