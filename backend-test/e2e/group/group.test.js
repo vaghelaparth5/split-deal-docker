@@ -56,5 +56,32 @@ describe("Group API - E2E Tests", () => {
         });
     });
 
+    describe("GET /api/group/get-groups", () => {
+        it("should return all groups", async () => {
+            await Group.create({
+                dealId: "60d21b4667d0d8992e610c85",
+                dealLogo: "logo",
+                dealTitle: "Demo Deal",
+                dealDescription: "Just a test",
+                storeName: "Store",
+                storeLocation: "Location",
+                totalValue: 99,
+                discount: 10,
+                expiryDate: new Date(),
+                membersRequired: 2
+            });
+
+            const res = await request(app)
+                .get("/api/group/get-groups")
+                .set("Authorization", `Bearer ${token}`);
+
+            expect(res.status).to.equal(200);
+            expect(res.body.length).to.be.at.least(1);
+        });
+    });
     
+
+
+
+
 });
