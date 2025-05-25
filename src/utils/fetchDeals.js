@@ -3,7 +3,7 @@ const { google } = require('googleapis');
 const serviceAccount = require('../config/googleServiceAccount'); // Load credentials from .js file
 
 const auth = new google.auth.GoogleAuth({
-  credentials: serviceAccount, // ✅ Use credentials instead of keyFile
+  credentials: serviceAccount, //  Use credentials instead of keyFile
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
