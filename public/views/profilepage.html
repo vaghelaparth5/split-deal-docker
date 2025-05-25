@@ -56,6 +56,7 @@
             <li class="header__el">
               <a href="/index.html" class="header__link">Home</a>
             </li>
+            <li class="header__el"><a href="/views/grouplisting.html" class="header__link">Groups</a></li>
             <li class="header__el">
               <a href="/views/dealsDetails.html" class="header__link">Deals</a>
             </li>
@@ -86,10 +87,8 @@
         <div class="profile-banner"></div>
         <div class="profile-avatar"></div>
         <h2 class="profile-name">Joseph K Saji</h2>
-        <p class="profile-role">Network Engineer</p>
         <p class="profile-bio">Passionate about crafting scalable web applications and seamless user experiences.</p>
         <div class="profile-actions">
-          <button class="btn-solid">Hire Me</button>
         </div>
       </div>
     </section>
@@ -170,20 +169,47 @@
     </section>
   </main>
   <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div>
-        <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
       </div>
-  
-      <div class="footer-text">
-        <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-        <p>© 2025 IT Labs.</p>
-      </div>
-  
-     
     </div>
-  </footer>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
   <script src="/js/profile.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/socket.io/socket.io.js"></script>

@@ -259,7 +259,7 @@ body {
   font-size: 18px;
   font-weight: 400;
   margin: 0px;
-  color: orange;
+  color: #FF6B00;
 }
 
 .price-box {
@@ -312,7 +312,7 @@ body {
 
 .price-box__people {
   font-size: 12px;
-  color: orange;
+  color: #FF6B00;
   font-weight: 300;
   letter-spacing: 1px;
 }
@@ -351,7 +351,7 @@ body {
 .price-box__price {
   margin-top: 3px;
   font-size: 14px;
-  color: orange;
+  color: #FF6B00;
   letter-spacing: 1px;
   margin-bottom: 0;
   font-weight: 300;
@@ -393,7 +393,7 @@ body {
 }
 
 .price-box--blue .price-box__list-el:before {
-  color: orange;
+  color: #FF6B00;
 }
 
 .price-box__wrap:hover {
@@ -403,7 +403,7 @@ body {
 }
 
 .btn {
-  background-color: orange;
+  background-color: #FF6B00;
   border-radius: 20px;
   padding: 10px 25px;
   color: #fff;
@@ -427,7 +427,7 @@ body {
 
 .btn--revert {
   background-color: transparent;
-  color: orange;
+  color: #FF6B00;
   box-shadow: none;
   border: 1px solid #c9d9e9;
 }
@@ -436,7 +436,7 @@ body {
   background-color: transparent;
   color: #1f4568;
   box-shadow: none;
-  border: 1px solid orange;
+  border: 1px solid #FF6B00;
 }
 
 .btn--purple {
@@ -467,12 +467,12 @@ body {
 .btn--white {
   background-color: #fff;
   border: 1px solid #ededed;
-  color: orange;
+  color: #FF6B00;
 }
 
 .btn--white:hover {
   background-color: #fff;
-  color: orange;
+  color: #FF6B00;
 }
 
 .price-box__btn {
@@ -532,7 +532,7 @@ body {
   height: 12px;
   width: 12px;
   background-color: #fff;
-  border: 2px solid orange;
+  border: 2px solid #FF6B00;
   margin-right: 8px;
 }
 
@@ -568,7 +568,7 @@ body {
 }
 .item__description {
   margin-top: 35px;
-  color: orange;
+  color: #FF6B00;
   line-height: 23px;
 }
 .item__avatar {
@@ -612,7 +612,7 @@ body {
 
 .item__occupation {
   font-size: 14px;
-  color: orange;
+  color: #FF6B00;
   text-align: center;
 }
 
@@ -622,7 +622,7 @@ body {
 .site__title {
   font-size: 30px;
   margin: 0;
-  color: orange;
+  color: #FF6B00;
   text-align: center;
 }
 
@@ -679,7 +679,7 @@ body {
 }
 
 .header__light {
-  color: orange;
+  color: #FF6B00;
 }
 .header__link {
   color: #1f4568;
@@ -690,7 +690,7 @@ body {
   color: #3a9fff;
 }
 .navbar-toggle .icon-bar {
-  background-color: orange;
+  background-color: #FF6B00;
 }
 .navbar-toggle {
   margin: 5px 0;
@@ -762,7 +762,7 @@ body {
 }
 .article-pre__info {
   font-size: 16px;
-  color: orange;
+  color: #FF6B00;
   margin: 0;
   padding: 25px 25px 0 25px;
 }
@@ -796,12 +796,12 @@ body {
 }
 
 .contacts--light {
-  color: orange;
+  color: #FF6B00;
 }
 
 .contacts__address {
   margin-top: 20px;
-  color: orange;
+  color: #FF6B00;
   font-size: 16px;
   line-height: 27px;
   padding-bottom: 12px;
@@ -814,12 +814,12 @@ body {
   position: absolute;
   width: 20px;
   height: 1px;
-  background-color: orange;
+  background-color: #FF6B00;
   bottom: 0;
   left: 0;
 }
 .contacts__info {
-  color: orange;
+  color: #FF6B00;
   font-size: 16px;
   margin-bottom: 2px;
 }
@@ -865,7 +865,7 @@ body {
   padding-right: 30px;
   background-position-y: center;
   background-color: #fff;
-  color: orange;
+  color: #FF6B00;
 }
 
 .form__field--half {
@@ -982,7 +982,7 @@ body {
     background-color: transparent;
   }
   .header__el--blue {
-    background-color: orange;
+    background-color: #FF6B00;
   }
 }
 
@@ -1129,7 +1129,7 @@ body {
   .btn {
     font-size: 12px;
     padding: 8px 8px;
-    background-color: orange;
+    background-color: #FF6B00;
   }
   .btn--width {
     width: 100px;
@@ -1724,7 +1724,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 107, 0, 0.9); /* Brand orange with opacity */
+  background-color: rgba(255, 107, 0, 0.9); /* Brand #FF6B00 with opacity */
   color: white;
   opacity: 0;
   display: flex;
@@ -1764,7 +1764,7 @@ img {
 
 .about-section h2 {
   font-size: 2.5rem;
-  color: #FF6B00; /* brand orange */
+  color: #FF6B00; /* brand #FF6B00 */
   margin-bottom: 20px;
 }
 

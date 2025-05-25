@@ -115,6 +115,7 @@ authForm.addEventListener("submit", async (e) => {
 
     authForm.reset();
     if (!isLogin) toggleLink.click();
+    console.log("Form submitted successfully");
   } catch (err) {
     console.error(err);
     alert(`Error: ${err.message}`);

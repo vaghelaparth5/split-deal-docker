@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <style>
     .profile-container {
       position: relative;
@@ -52,13 +53,14 @@
   <header class="header">
     <div class="container header__container">
       <div class="header__logo">
-        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170" />
+        <img class="header__img" src="/images/split-deal-logo.png" height="40" width="170" />
         <h1 class="header__title"></h1>
       </div>
       <div class="header__menu">
         <nav id="navbar" class="header__nav collapse">
           <ul class="header__elenco">
             <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/grouplisting.html" class="header__link">Groups</a></li>
             <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
             <li class="header__el"><a href="#" class="header__link">About Us</a></li>
             <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
@@ -126,17 +128,48 @@
 
     </form>
   </div>
-    <!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-container">
-    <div>
-      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+  <!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
+      </div>
     </div>
-
-    <div class="footer-text">
-      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-      <p>© 2025 IT Labs.</p>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
 
    
   </div>
