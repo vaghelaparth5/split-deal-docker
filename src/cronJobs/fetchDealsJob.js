@@ -1,34 +1,46 @@
+// src/cronJobs/fetchDealsJob.js
 const axios = require('axios');
-const Deal = require('../models/Deal'); 
+const mongoose = require('mongoose');
+const Deal = require('../models/Deal');
+
 const fetchDealsJob = async () => {
   try {
-    console.log(`[CRON]  Starting fetchDealsJob...`);
+    console.log(`[CRON] Starting fetchDealsJob...`);
 
-    const res = await axios.get('https://dummyjson.com/products?limit=5');
+    const res = await axios.get('https://dummyjson.com/products?limit=10');
     const products = res.data.products;
 
-    const newDeals = products.map(p => ({
-      title: p.title,
-      description: p.description,
-      price: p.price,
-      original_price: p.price / (1 - p.discountPercentage / 100), // reverse-calculate original
-      deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-      is_active: true,
-      storeName: p.brand,
-      storeLocation: "Online",
-      max_participants: p.stock,
-      creator: new mongoose.Types.ObjectId(), // dummy ID or your admin user
-      participants: [],
-      category: p.category,
-      image_url: p.thumbnail
-    }));
+    const dealsToInsert = [];
 
-    const result = await Deal.insertMany(newDeals);
-    console.log(` Inserted ${result.length} new deals into MongoDB`);
+    for (const product of products) {
+      const exists = await Deal.findOne({ title: product.title });
+      if (!exists) {
+        dealsToInsert.push({
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          original_price: Math.round(product.price + product.price * (product.discountPercentage / 100)),
+          deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days later
+          location: "Online",
+          max_participants: 10,
+          creator: new mongoose.Types.ObjectId(), // Replace with real ID if needed
+          participants: [],
+          category: product.category,
+          image_url: product.thumbnail,
+          is_active: true
+        });
+      }
+    }
+
+    if (dealsToInsert.length > 0) {
+      await Deal.insertMany(dealsToInsert);
+      console.log(`[CRON] Inserted ${dealsToInsert.length} new deal(s).`);
+    } else {
+      console.log(`[CRON] No new deals to insert (all were duplicates).`);
+    }
   } catch (err) {
-    console.error(`[CRON ] Failed to fetch/write deals:`, err.message);
+    console.error(`[CRON] Error in fetchDealsJob: ${err.message}`);
   }
 };
 
 module.exports = fetchDealsJob;
-
