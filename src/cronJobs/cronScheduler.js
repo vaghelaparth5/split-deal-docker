@@ -1,16 +1,16 @@
 // src/cronJobs/cronScheduler.js
 const cron = require('node-cron');
-const dealExpiryJob = require('./dealExpiryJob');
 const fetchDealsJob = require('./fetchDealsJob');
+const dealExpiryJob = require('./dealExpiryJob');
 
-// 🕛 Runs every minute (for testing) – disable later
-cron.schedule('* * * * *', async () => {
-  console.log(`[CRON TEST] Running dealExpiryJob...`);
-  await dealExpiryJob();
+// Run every 6 hours
+cron.schedule('0 */6 * * *', async () => {
+  console.log('[CRON] Scheduled fetchDealsJob triggered...');
+  await fetchDealsJob();
 });
 
-// ⏰ Runs every 6 hours
-cron.schedule('0 */6 * * *', async () => {
-  console.log(`[CRON] Running scheduled fetchDealsJob...`);
-  await fetchDealsJob();
+// Run daily at midnight
+cron.schedule('0 0 * * *', async () => {
+  console.log('[CRON] Scheduled dealExpiryJob triggered...');
+  await dealExpiryJob();
 });
