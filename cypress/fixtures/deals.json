@@ -1,0 +1,88 @@
+{
+  "deals": [
+    {
+      "_id": "1",
+      "title": "Superdry Men's Jacket",
+      "description": "Windproof and waterproof jacket with fleece lining",
+      "image_url": "https://example.com/superdry-jacket.jpg",
+      "location": "Melbourne Central",
+      "price": 89.99,
+      "original_price": 129.99,
+      "deadline": "2025-12-31T23:59:59Z",
+      "brand": "Superdry",
+      "category": "Outerwear",
+      "weekend_only": false,
+      "max_participants": 5
+    },
+    {
+      "_id": "2",
+      "title": "Nike Air Running Shoes",
+      "description": "Latest model with improved cushioning",
+      "image_url": "https://example.com/nike-shoes.jpg",
+      "location": "Chadstone Shopping Center",
+      "price": 120.00,
+      "original_price": 150.00,
+      "deadline": "2024-12-31T23:59:59Z",
+      "brand": "Nike",
+      "category": "Footwear",
+      "weekend_only": true,
+      "max_participants": 4
+    },
+    {
+      "_id": "3",
+      "title": "Tommy Hilfiger Polo Shirt",
+      "description": "Classic fit polo shirt in various colors",
+      "image_url": "https://example.com/tommy-polo.jpg",
+      "location": "DFO South Wharf",
+      "price": 35.50,
+      "original_price": 45.00,
+      "deadline": "2025-06-30T23:59:59Z",
+      "brand": "Tommy Hilfiger",
+      "category": "Clothing",
+      "weekend_only": false,
+      "max_participants": 3
+    },
+    {
+      "_id": "4",
+      "title": "Zara Women's Blazer",
+      "description": "Slim fit blazer for office wear",
+      "image_url": "https://example.com/zara-blazer.jpg",
+      "location": "Emporium Melbourne",
+      "price": 79.95,
+      "original_price": 99.95,
+      "deadline": "2025-03-15T23:59:59Z",
+      "brand": "Zara",
+      "category": "Clothing",
+      "weekend_only": true,
+      "max_participants": 2
+    },
+    {
+      "_id": "5",
+      "title": "Levi's 501 Original Jeans",
+      "description": "Classic straight fit jeans",
+      "image_url": "https://example.com/levis-jeans.jpg",
+      "location": "Myer Bourke Street",
+      "price": 65.00,
+      "original_price": 89.95,
+      "deadline": "2025-01-31T23:59:59Z",
+      "brand": "Levi's",
+      "category": "Jeans",
+      "weekend_only": false,
+      "max_participants": 6
+    },
+    {
+      "_id": "6",
+      "title": "Superdry Weekend Backpack",
+      "description": "Durable backpack with laptop compartment",
+      "image_url": "https://example.com/superdry-backpack.jpg",
+      "location": "QV Melbourne",
+      "price": 45.00,
+      "original_price": 65.00,
+      "deadline": "2024-11-30T23:59:59Z",
+      "brand": "Superdry",
+      "category": "Accessories",
+      "weekend_only": true,
+      "max_participants": 4
+    }
+  ]
+}

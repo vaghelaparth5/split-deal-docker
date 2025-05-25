@@ -7,6 +7,23 @@ const modal = document.getElementById("createGroupModal");
 const closeBtn = document.querySelector(".close");
 const dealForm = document.getElementById("dealForm");
 
+const loginMenuItem = document.getElementById("loginMenuItem");
+const profileMenu = document.getElementById("profileMenu");
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+const logoutBtn = document.getElementById("logoutBtn");
+
+const token = localStorage.authToken;
+  if (token) {
+    showProfileUI('P');
+  }
+
+  function showProfileUI(name = "U") {
+  loginMenuItem.style.display = "none";
+  profileMenu.style.display = "inline-block";
+  profileIcon.textContent = name[0].toUpperCase();
+}
+
 // Update the openGroupModal function
 // Function to open group creation modal
 function openModal(dealData) {
@@ -299,18 +316,18 @@ function simulateEmailSend(email) {
 }
 
 
-module.exports = {
-  deals,
-  openModal,
-  closeModal,
-  dealForm, // Exporting elements initialized at top level
-  dealGrid,
-  brandFilter,
-  searchInput,
-  modal,
-  closeBtn,
-  renderDeals,
-  applyFilters,
-  fetchDeals,
-  add, // If you keep this function
-};
+// module.exports = {
+//   deals,
+//   openModal,
+//   closeModal,
+//   dealForm, // Exporting elements initialized at top level
+//   dealGrid,
+//   brandFilter,
+//   searchInput,
+//   modal,
+//   closeBtn,
+//   renderDeals,
+//   applyFilters,
+//   fetchDeals,
+//   add, // If you keep this function
+// };

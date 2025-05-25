@@ -126,6 +126,10 @@ body {
   border-color: #f5f5f5;
 }
 
+.expired{
+  pointer-events: none;
+}
+
 .deal-card.expired::after {
   content: "Expired";
   position: absolute;
@@ -233,6 +237,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
+}
+
+.create-deal-btn-expired{
+  pointer-events: none;
 }
 
 .deal-card button:hover {
