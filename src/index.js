@@ -33,6 +33,7 @@ const authRoutes = require("./routes/authRoutes");
 const dealRoutes = require('./routes/dealRoutes');
 const groupRoutes = require('./routes/groupRoutes');
 const groupMemberRoutes = require('./routes/groupMemberRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 connectDB();
 
@@ -77,6 +78,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/deal", dealRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/groupMember", groupMemberRoutes);
+app.use("/api/user", groupMemberRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
