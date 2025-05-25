@@ -85,7 +85,16 @@ exports.forgotPassword = async (req, res) => {
     // Construct reset URL
     const resetURL = `${process.env.FRONTEND_URL}/reset-password/${token}`;
 
-    // Email options
+    // ✅ Move transporter inside the function so it can be stubbed
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: +process.env.SMTP_PORT,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
     const mailOptions = {
       to: user_email,
       from: process.env.SMTP_FROM || 'no-reply@yourapp.com',
