@@ -7,8 +7,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const path = require('path');
-const http = require('http');                    // ✅ Added
-const { Server } = require('socket.io');         // ✅ Added
+const http = require('http');                    
+const { Server } = require('socket.io');         
 
 // Load environment variables
 dotenv.config();
@@ -17,16 +17,16 @@ dotenv.config();
 const app = express();
 
 // Create HTTP server
-const server = http.createServer(app);           // ✅ Added
+const server = http.createServer(app);           
 
 // Attach Socket.IO to the server
 const io = new Server(server, {
   cors: {
-    origin: "*", // 🔐 In production, replace with frontend origin
+    origin: "*", 
     methods: ["GET", "POST"]
   }
 });
-app.set("io", io);                                // ✅ Make io accessible to controllers
+app.set("io", io);                                
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
