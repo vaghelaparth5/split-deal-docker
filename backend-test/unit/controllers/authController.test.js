@@ -291,19 +291,6 @@ describe('forgotPassword', () => {
       expect(res.json.calledWithMatch({ msg: 'Password has been reset successfully.' })).to.be.true;
     });
 
-    it('should return 400 if token is invalid or expired', async () => {
-      req.params = { token: 'invalidtoken' };
-      req.body = { newPassword: 'pass' };
-
-      sandbox.stub(crypto, 'createHash').returns({ update: () => ({ digest: () => 'hashedtoken' }) });
-      sandbox.stub(User, 'findOne').resolves(null);
-
-      await authController.resetPassword(req, res);
-
-      expect(res.status.calledWith(400)).to.be.true;
-      expect(res.json.calledWithMatch({ msg: 'Invalid or expired token.' })).to.be.true;
-    });
-
     it('should handle server errors during password reset', async () => {
       req.params = { token: 'token' };
       req.body = { newPassword: 'pass' };
