@@ -12,9 +12,9 @@ const connect = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('✅ In-memory MongoDB connected');
+    console.log('In-memory MongoDB connected');
   } catch (err) {
-    console.error('❌ Failed to connect to in-memory MongoDB:', err);
+    console.error('Failed to connect to in-memory MongoDB:', err);
     throw err;
   }
 };
@@ -26,10 +26,10 @@ const close = async () => {
     }
     if (mongoServer) {
       await mongoServer.stop();
-      console.log('✅ In-memory MongoDB stopped');
+      console.log('In-memory MongoDB stopped');
     }
   } catch (err) {
-    console.error('❌ Error while closing MongoDB connection:', err);
+    console.error('Error while closing MongoDB connection:', err);
   }
 };
 
