@@ -1408,7 +1408,7 @@ img {
   position: absolute;
   top: 45px;
   right: 0;
-  background: white;
+  background: rgb(234, 137, 98);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   z-index: 1000;
@@ -1420,7 +1420,8 @@ img {
   color: black;
 }
 .dropdown a:hover {
-  background: #f0f0f0;
+  background: #c54c00;
+  color: white
 }
 
 .buttonscontainer{
