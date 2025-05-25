@@ -1,0 +1,29 @@
+[
+  {
+    "dealId": "101",
+    "dealLogo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp-Z5H8Lrp8q79zl6eN531tj0Jt9QmPcVaxg&s",
+    "dealTitle": "Nike Air Max Shoes",
+    "storeLocation": "Online",
+    "discount": "25% OFF",
+    "dealDescription": "Latest Nike Air Max running shoes, perfect for athletes.",
+    "expiryDate": "2025-12-31T23:59:59Z"
+  },
+  {
+    "dealId": "102",
+    "dealLogo": "https://logowik.com/content/uploads/images/dominos-pizza5190.jpg",
+    "dealTitle": "Domino's Pizza Feast",
+    "storeLocation": "Downtown",
+    "discount": "2 Medium Pizzas for $22",
+    "dealDescription": "Choose any two medium pizzas from our classic range.",
+    "expiryDate": "2025-11-30T23:59:59Z"
+  },
+  {
+    "dealId": "103",
+    "dealLogo": "https://media.designrush.com/inspirations/758970/conversions/1-preview.jpg",
+    "dealTitle": "Levi's Classic Jeans",
+    "storeLocation": "Mall Road",
+    "discount": "Buy One Get One 50% Off",
+    "dealDescription": "Iconic Levi's jeans, timeless style and comfort.",
+    "expiryDate": "2026-01-15T23:59:59Z"
+  }
+]
