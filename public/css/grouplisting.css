@@ -5,42 +5,98 @@ body {
   color: #333;
 }
 
-/* Header Styles */
+/*menu header*/
 .header {
-  background-color: #fff;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 30px 25px;
 }
-
-.header__container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header__logo img {
-  display: block;
-}
-
-.header__nav .header__menu {
-  list-style: none;
-  display: flex;
-  gap: 24px;
-  margin: 0;
+.header__elenco {
   padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.header__menu {
+  float: right;
+}
+.header__el {
+  padding: 0 25px;
+  display: inline-block;
+}
+.header__img {
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.header__menu li a {
-  text-decoration: underline;
-  color: #003366;
-  font-weight: 500;
+.header__logo,
+.header__menu {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header__title {
+  font-size: 18px;
+  margin: 0;
+  margin-left: 10px;
+  display: inline-block;
+  line-height: 18px;
+  vertical-align: middle;
 }
 
-.header__menu li a:hover {
-  color: #0077cc;
+.header__light {
+  color: #FF6B00;
+}
+.header__link {
+  color: #1f4568;
+  font-size: 14px;
+}
+.header__link:hover {
+  text-decoration: none;
+  color: #3a9fff;
+}
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+.profile-icon {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #555;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: rgb(234, 137, 98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  z-index: 1000;
+}
+.dropdown a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+}
+.dropdown a:hover {
+  background: #c54c00;
+  color: white
+}
+
+.buttonscontainer{
+  display: flex;
+  justify-content: center;
+}
+
+.padding-button{
+  margin: 10px;
 }
 
 /* Filters */

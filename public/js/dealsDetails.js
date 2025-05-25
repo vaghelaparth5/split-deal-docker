@@ -257,7 +257,7 @@ function showGroupCreationNotification() {
   
   // Set up the button to navigate to the group page
   viewGroupBtn.addEventListener('click', () => {
-    window.location.href = `/groupslisting.html`; // Adjust this URL to your actual group page route
+    window.location.href = `/views/grouplisting.html`; // Adjust this URL to your actual group page route
   });
   
   // Show the notification

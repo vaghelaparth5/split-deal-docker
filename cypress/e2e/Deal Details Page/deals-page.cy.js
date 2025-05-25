@@ -1,8 +1,4 @@
 describe('Deals Page', () => {
-  before(() => {
-    // Start your server if needed
-    // cy.exec('npm start');
-  });
 
   beforeEach(() => {
     // Increase timeouts
