@@ -9,23 +9,21 @@
     <script src="/js/dealDetails.js"></script>
   </head>
   <body>
-    <header class="header">
+    <!-- Header/Navbar -->
+  <header class="header">
+    <div class="container header__container">
+      <div class="header__logo">
+        <img class="header__img" src="../images/split-deal-logo.png" height="40" width="170">
+        <h1 class="header__title"></h1>
+      </div>
       <div class="header__menu">
         <nav id="navbar" class="header__nav collapse">
           <ul class="header__elenco">
-            <li class="header__el">
-              <a href="/index.html" class="header__link">Home</a>
-            </li>
-            <li class="header__el">
-              <a href="/views/dealsDetails.html" class="header__link">Deals</a>
-            </li>
-            <li class="header__el">
-              <a href="#" class="header__link">About Us</a>
-            </li>
-            <li class="header__el" id="loginMenuItem">
-              <a href="/views/login.html" class="header__link">Login</a>
-            </li>
-            <li class="header__el" id="profileMenu" style="display: none">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
               <div class="profile-container">
                 <div id="profileIcon" class="profile-icon">U</div>
                 <div class="dropdown" id="profileDropdown">
@@ -37,13 +35,27 @@
           </ul>
         </nav>
       </div>
-    </header>
-    <div class="page-wrapper">
+    
 
-      <main class="main-content full-width">
-        <h2>🔥 Exclusive Deals Just for You</h2>
-
-        <div class="filters">
+      <div id="deal-notification" class="deal-popup">
+        <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+        <div class="deal-text">
+          <strong id="deal-title"></strong><br />
+          <span id="deal-price"></span><br />
+          <span id="deal-location"></span><br />
+          <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
+        </div>
+        <button id="close-notification" class="close-btn">x</button>
+      </div>
+    </div>
+  </header>
+  <div class="deal-banner">
+  <div class="banner-content">
+    <h1 class="deal-title">Deal Details</h1>
+    <p class="deal-subtitle">Create groups and manage your deal</p>
+    <div class="banner-actions">
+      <!-- <button class="create-group-btn">Create Group</button> -->
+       <div class="filters">
           <label for="brandFilter">Filter by Brand:</label>
           <select id="brandFilter">
             <option value="All">All Brands</option>
@@ -57,6 +69,20 @@
           <label for="searchInput">Search:</label>
           <input type="text" id="searchInput" placeholder="Search deals..." />
         </div>
+    </div>
+  </div>
+  <div class="banner-decoration">
+    <div class="decoration-circle"></div>
+    <div class="decoration-circle"></div>
+    <div class="decoration-circle"></div>
+  </div>
+</div>
+    <div class="page-wrapper">
+
+      <main class="main-content full-width">
+        <!-- <h2>🔥 Exclusive Deals Just for You</h2> -->
+
+        
 
         <div class="deal-grid" id="dealGrid">
           <!-- Injected by JS -->
@@ -130,22 +156,82 @@
     </form>
   </div>
 </div>
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div>
-          <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
-        </div>
 
-        <div class="footer-text">
-          <p>
-            We're part of the
-            <a href="#" class="footer-link">Deakin Uni</a> family.
-          </p>
-          <p>© 2025 IT Labs.</p>
+<section class="email-subscription">
+  <div class="subscription-container">
+    <div class="subscription-content">
+      <h2>Never Miss a Deal Again!</h2>
+      <p>Subscribe to get notified about exclusive offers and new deals in your area</p>
+      <form id="subscribeForm" class="subscription-form">
+        <div class="input-group">
+          <input type="email" id="subscribeEmail" placeholder="Enter your email" required>
+          <button type="submit" class="subscribe-btn">Subscribe</button>
         </div>
+        <div class="subscription-message" id="subscriptionMessage"></div>
+      </form>
+    </div>
+    <div class="subscription-image">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Add this at the bottom of your body -->
+<div class="notification-popup" id="groupCreationNotification">
+  <div class="notification-content">
+    <div class="notification-icon">✓</div>
+    <h3>Group Created Successfully!</h3>
+    <p>Your new group is ready to use.</p>
+    <button class="view-group-btn" id="viewGroupBtn">View Group</button>
+  </div>
+</div>
+    
+  <!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
       </div>
-    </footer>
+    </div>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
+
     <script src="/js/dealsDetails.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/socket.io/socket.io.js"></script>

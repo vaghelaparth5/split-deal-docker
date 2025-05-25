@@ -59,8 +59,8 @@ if (document.getElementById('groupForm')) {
 
       if (response.ok) {
         closeModal();
-        alert('Group deal created successfully!');
-        fetchGroups(); // Refresh the groups list
+        showGroupCreationNotification();
+        // alert('Group deal created successfully!');
       } else {
         const errorData = await response.json();
         console.error('Error:', errorData);
@@ -105,29 +105,64 @@ function renderDeals(filteredDeals) {
     return;
   }
 
+  // filteredDeals.forEach((deal) => {
+  //   const card = document.createElement("div");
+  //   card.className = "deal-card";
+  //   card.innerHTML = `
+  //     <img src="${deal.image_url || "https://via.placeholder.com/150"}" alt="${
+  //     deal.title
+  //   }" />
+  //     <h3>${deal.title}</h3>
+  //     <p>${deal.description || ""}</p>
+  //     <p>${deal.location || "Location not specified"}</p>
+  //     <p><strong>Price:</strong> $${deal.price} <s>$${
+  //     deal.original_price
+  //   }</s></p>
+  //     <p><strong>Expiry:</strong> ${new Date(
+  //       deal.deadline
+  //     ).toLocaleDateString()}</p>
+  //     <button class="create-deal-btn">Create Group 🚀</button>
+  //   `;
+  //   dealGrid.appendChild(card);
+
+  //   const button = card.querySelector(".create-deal-btn");
+  //   button.addEventListener("click", () => openModal(deal));
+  // });
+
   filteredDeals.forEach((deal) => {
     const card = document.createElement("div");
     card.className = "deal-card";
+    
+    // Add expired class if deal is expired
+    if (new Date(deal.deadline) < new Date()) {
+        card.classList.add("expired");
+    }
+    
     card.innerHTML = `
-      <img src="${deal.image_url || "https://via.placeholder.com/150"}" alt="${
-      deal.title
-    }" />
-      <h3>${deal.title}</h3>
-      <p>${deal.description || ""}</p>
-      <p>${deal.location || "Location not specified"}</p>
-      <p><strong>Price:</strong> $${deal.price} <s>$${
-      deal.original_price
-    }</s></p>
-      <p><strong>Expiry:</strong> ${new Date(
-        deal.deadline
-      ).toLocaleDateString()}</p>
-      <button class="create-deal-btn">Create Group 🚀</button>
+      ${deal.weekend_only ? '<span class="weekend-tag">Weekend Only</span>' : ''}
+      <img src="${deal.image_url || 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}" alt="${deal.title}" />
+      <div class="card-content">
+        <h3>${deal.title}</h3>
+        <p>${deal.description || ''}</p>
+        
+        <div class="deal-meta">
+          <p class="location">${deal.location || 'Location not specified'}</p>
+          <p><span class="price">$${deal.price}</span> <span class="original-price"><s>$${deal.original_price}</s></span></p>
+          <p class="expiry">${new Date(deal.deadline).toLocaleDateString()}</p>
+        </div>
+        
+        <button class="create-deal-btn">
+          <span>Create Group</span>
+          <span>🚀</span>
+        </button>
+      </div>
     `;
+    
     dealGrid.appendChild(card);
 
     const button = card.querySelector(".create-deal-btn");
     button.addEventListener("click", () => openModal(deal));
-  });
+});
 }
 
 function applyFilters() {
@@ -180,6 +215,89 @@ if (brandFilter && searchInput) {
 function add(a, b) {
   return a + b;
 }
+
+// Function to show the notification
+function showGroupCreationNotification() {
+  const notification = document.getElementById('groupCreationNotification');
+  const viewGroupBtn = document.getElementById('viewGroupBtn');
+  
+  // Set up the button to navigate to the group page
+  viewGroupBtn.addEventListener('click', () => {
+    window.location.href = `/groupslisting.html`; // Adjust this URL to your actual group page route
+  });
+  
+  // Show the notification
+  notification.classList.add('show');
+  
+  // Auto-hide after 5 seconds (optional)
+  setTimeout(() => {
+    notification.classList.remove('show');
+    notification.classList.add('hide');
+    
+    // Remove the hide class after animation completes
+    setTimeout(() => {
+      notification.classList.remove('hide');
+    }, 500);
+  }, 5000);
+}
+
+document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const emailInput = document.getElementById('subscribeEmail');
+  const messageElement = document.getElementById('subscriptionMessage');
+  const email = emailInput.value.trim();
+  
+  // Reset message
+  messageElement.textContent = '';
+  messageElement.className = 'subscription-message';
+  
+  // Validate email
+  if (!validateEmail(email)) {
+    messageElement.textContent = 'Please enter a valid email address';
+    messageElement.classList.add('error');
+    return;
+  }
+  
+  // Simulate sending email (in a real app, you would make an API call here)
+  simulateEmailSend(email)
+    .then(() => {
+      messageElement.textContent = 'Thank you for subscribing! You will receive updates on upcoming deals.';
+      messageElement.classList.add('success');
+      emailInput.value = ''; // Clear the input
+      
+      // Reset message after 5 seconds
+      setTimeout(() => {
+        messageElement.textContent = '';
+        messageElement.className = 'subscription-message';
+      }, 5000);
+    })
+    .catch(error => {
+      messageElement.textContent = 'Something went wrong. Please try again later.';
+      messageElement.classList.add('error');
+      console.error('Subscription error:', error);
+    });
+});
+
+// Email validation function
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+// Simulate email sending (replace with actual API call in production)
+function simulateEmailSend(email) {
+  return new Promise((resolve) => {
+    // In a real application, you would make an API call here
+    console.log(`Email would be sent to: ${email}`);
+    
+    // Simulate network delay
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
+}
+
 
 module.exports = {
   deals,
