@@ -3,39 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Group Deals</title>
+  <title>SplitDeal | Group Deals</title>
   <link rel="stylesheet" href="../css/grouplisting.css" />
+
 </head>
 <body>
-  <h1>Available Group Deals</h1>
-  <div id="group-grid" class="grid"></div>
+  <!-- ✅ SplitDeal Header with Navigation + Filters -->
+  <header class="header">
+    <div class="header__container">
+      <div class="header__logo">
+        <img src="/images/split-deal-logo.png" alt="SplitDeal Logo" height="40" width="170" />
+      </div>
+      <nav class="header__nav">
+        <ul class="header__menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dealsDetails.html">Deals</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="/views/login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
 
-  <!-- Modal -->
+    <!-- 🔍 Search & Filters -->
+    <div class="filters">
+      <input type="text" id="search" placeholder="🔍 Search Deals..." />
+      <select id="filter-location">
+        <option value="">📍 All Locations</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div id="group-grid" class="grid"></div>
+  </main>
+
+  <!-- 🔍 Deal Modal -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2 id="modal-title"></h2>
-      <img id="modal-img" alt="Deal image" />
-      <p id="modal-desc"></p>
-      <p id="modal-price"></p>
-      <button onclick="confirmJoin()">Confirm Join</button>
+      <span class="close-btn" id="close-btn">&times;</span>
+      <img id="modal-img" src="" class="modal-img" />
+      <h2 id="modal-title" class="modal-title"></h2>
+      <p id="modal-desc" class="modal-desc"></p>
+      <p id="modal-price" class="modal-price"></p>
+      <p id="modal-deadline" class="modal-deadline"></p>
+      <button id="join-btn" class="join-btn">Confirm Join</button>
     </div>
   </div>
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div>
-        <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
-      </div>
-  
-      <div class="footer-text">
-        <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-        <p>© 2025 IT Labs.</p>
-      </div>
-  
-     
+
+  <!-- 🛍️ Deal Notification -->
+  <div id="deal-notification" class="deal-popup hidden">
+    <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
+    <div class="deal-text">
+      <strong id="deal-title"></strong><br />
+      <span id="deal-price"></span><br />
+      <span id="deal-location"></span><br />
+      <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
     </div>
-  </footer>
+    <button id="close-notification" class="close-btn">×</button>
+  </div>
+
+  <!-- 👥 Group Notification -->
+  <div id="group-notification" class="group-popup hidden">
+    <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="group-title"></strong><br />
+      <span id="group-members"></span><br />
+      <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
+    </div>
+    <button id="close-group" class="close-btn">×</button>
+  </div>
+    
+  <!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
+      </div>
+    </div>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
+
   <script src="../js/groups.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/mainSocket.js"></script>
 </body>
 </html>
