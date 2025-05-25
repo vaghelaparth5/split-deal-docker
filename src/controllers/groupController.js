@@ -55,15 +55,27 @@ exports.updateGroupStatus = async (req, res) => {
     const group = await Group.findByIdAndUpdate(
       id,
       { status },
-      { new: true } // Return the updated document
+      { new: true }
     );
+
     if (!group) return res.status(404).json({ msg: "Group not found" });
+
+    //  Emit socket event
+    const io = req.app.get("io");
+    if (io) {
+      io.emit("group-status-updated", {
+        groupId: group._id,
+        newStatus: group.status,
+        title: group.dealTitle
+      });
+    }
 
     res.json({ msg: "Group status updated successfully", group });
   } catch (error) {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
 exports.getAllGroups = async (req, res) => {
   try {
     const groups = await Group.find();
