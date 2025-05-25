@@ -171,10 +171,46 @@ describe("Group API - E2E Tests", () => {
             expect(res.body.dealTitle).to.equal("One Group");
         });
     });
+    describe("PUT /api/group/update-receipt/:id", () => {
+        it("should update receiptImage", async () => {
+            const group = await Group.create({
+                dealId: new Date().getTime().toString(),
+                dealLogo: "logo",
+                dealTitle: "Receipt Group",
+                dealDescription: "desc",
+                storeName: "Test",
+                storeLocation: "City",
+                totalValue: 200,
+                discount: 15,
+                expiryDate: new Date(),
+                membersRequired: 4,
+            });
 
+            const res = await request(app)
+                .put(`/api/group/update-receipt/${group._id}`)
+                .send({ receiptImage: "https://example.com/image.png" });
 
+            expect(res.status).to.equal(200);
+            expect(res.body.group.receiptImage).to.equal("https://example.com/image.png");
+        });
 
+        it("should return 400 if image is empty", async () => {
+            const group = await Group.create({
+                dealId: new Date().getTime().toString(),
+                dealLogo: "logo",
+                dealTitle: "No Image Group",
+                storeLocation: "City",
+                totalValue: 100,
+                discount: 10,
+                expiryDate: new Date(),
+                membersRequired: 2,
+            });
 
+            const res = await request(app)
+                .put(`/api/group/update-receipt/${group._id}`)
+                .send({ receiptImage: "" });
 
-
+            expect(res.status).to.equal(400);
+        });
+    });
 });
