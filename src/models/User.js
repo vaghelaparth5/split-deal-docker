@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   failure_order: { type: Number, default: 0 },
   total_money_saved: { type: Number, default: 0 },
   resetPasswordToken: { type: String , default: "" },
-  resetPasswordExpires: { type: Date , default: "" }
+  resetPasswordExpires: { type: Date, default: null }
 });
 
 module.exports = mongoose.model("User", UserSchema);
