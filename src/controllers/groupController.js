@@ -128,17 +128,24 @@ exports.updateMembersRequired = async (req, res) => {
     const { id } = req.params;
     const { membersRequired } = req.body;
 
-    if (!membersRequired || membersRequired < 1) {
+    // Check if it's a number and >= 1
+    if (
+      membersRequired === undefined ||
+      isNaN(membersRequired) ||
+      Number(membersRequired) < 1
+    ) {
       return res.status(400).json({ msg: "Valid membersRequired value is required" });
     }
 
     const group = await Group.findByIdAndUpdate(
       id,
-      { membersRequired },
-      { new: true } // Return the updated document
+      { membersRequired: Number(membersRequired) },
+      { new: true }
     );
 
-    if (!group) return res.status(404).json({ msg: "Group not found" });
+    if (!group) {
+      return res.status(404).json({ msg: "Group not found" });
+    }
 
     res.json({ msg: "Members required updated successfully", group });
   } catch (error) {
