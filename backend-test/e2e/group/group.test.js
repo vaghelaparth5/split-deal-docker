@@ -79,7 +79,33 @@ describe("Group API - E2E Tests", () => {
             expect(res.body.length).to.be.at.least(1);
         });
     });
-    
+
+    describe("PUT /api/group/update-group-status/:id", () => {
+        it("should update group status", async () => {
+            const group = await Group.create({
+                dealId: "60d21b4667d0d8992e610c85",
+                dealLogo: "logo",
+                dealTitle: "Demo",
+                dealDescription: "desc",
+                storeName: "store",
+                storeLocation: "loc",
+                totalValue: 100,
+                discount: 10,
+                expiryDate: new Date(),
+                membersRequired: 3
+            });
+
+            const res = await request(app)
+                .put(`/api/group/update-group-status/${group._id}`)
+                .set("Authorization", `Bearer ${token}`)
+                .send({ status: "completed" });
+
+            expect(res.status).to.equal(200);
+            expect(res.body.group.status).to.equal("completed");
+        });
+    });
+
+
 
 
 
