@@ -104,6 +104,31 @@ describe("Group API - E2E Tests", () => {
             expect(res.body.group.status).to.equal("completed");
         });
     });
+    describe("PUT /api/group/update-members-required/:id", () => {
+        it("should update membersRequired", async () => {
+            const group = await Group.create({
+                dealId: "60d21b4667d0d8992e610c85",
+                dealLogo: "logo",
+                dealTitle: "Demo",
+                dealDescription: "desc",
+                storeName: "store",
+                storeLocation: "loc",
+                totalValue: 100,
+                discount: 10,
+                expiryDate: new Date(),
+                membersRequired: 3
+            });
+
+            const res = await request(app)
+                .put(`/api/group/update-members-required/${group._id}`)
+                .set("Authorization", `Bearer ${token}`)
+                .send({ membersRequired: 5 });
+
+            expect(res.status).to.equal(200);
+            expect(res.body.group.membersRequired).to.equal(5);
+        });
+    });
+
 
 
 
