@@ -6,15 +6,31 @@ let mongoServer;
 const connect = async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('✅ In-memory MongoDB connected');
+  } catch (err) {
+    console.error('❌ Failed to connect to in-memory MongoDB:', err);
+    throw err;
+  }
 };
 
 const close = async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
+  try {
+    if (mongoose.connection.readyState !== 0) {
+      await mongoose.disconnect();
+    }
+    if (mongoServer) {
+      await mongoServer.stop();
+      console.log('✅ In-memory MongoDB stopped');
+    }
+  } catch (err) {
+    console.error('❌ Error while closing MongoDB connection:', err);
+  }
 };
 
 const clear = async () => {
