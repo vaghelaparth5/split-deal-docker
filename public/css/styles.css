@@ -4,6 +4,11 @@
 /* ===============================
    Toast Notification Style
    =============================== */
+#group-status-notification {
+  top: 140px; /* to avoid overlap with other toasts */
+  background: linear-gradient(135deg, #ffe6e6, #ffc2c2);
+  color: #842029;
+}
 
 
  /* =====================

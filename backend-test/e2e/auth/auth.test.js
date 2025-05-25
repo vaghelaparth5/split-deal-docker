@@ -1,6 +1,7 @@
 const { expect } = require('chai');
 const request = require('supertest');
-const app = require('../../../src/index');
+const bcrypt = require('bcryptjs');
+const app = require('../../../src/app');
 const User = require('../../../src/models/User');
 const { connect, close, clear } = require('../../helpers/db');
 
@@ -58,7 +59,7 @@ describe('Auth API - E2E Tests', () => {
     beforeEach(async () => {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash('password123', salt);
-      
+
       await User.create({
         user_email: 'test@example.com',
         user_password: hashedPassword,
@@ -92,5 +93,35 @@ describe('Auth API - E2E Tests', () => {
     });
   });
 
-  // Add more test cases for other endpoints
+  describe('POST /api/auth/forgot-password', () => {
+    beforeEach(async () => {
+      await User.create({
+        user_email: 'test@example.com',
+        user_password: 'password123',
+        name: 'Test User'
+      });
+    });
+
+    it('should send a password reset email', async function () {
+      this.timeout(5000); // ⏱️ Allow more time for nodemailer
+
+      const res = await request(app)
+        .post('/api/auth/forgot-password')
+        .send({ user_email: 'test@example.com' });
+
+      expect(res.status).to.equal(200);
+      expect(res.body).to.have.property('msg').that.includes('Password reset link');
+    });
+
+    it('should return 404 for non-existent email', async () => {
+      const res = await request(app)
+        .post('/api/auth/forgot-password')
+        .send({ user_email: 'nonexistent@example.com' });
+
+      expect(res.status).to.equal(404);
+      expect(res.body).to.have.property('msg', 'No account with that email.');
+    });
+  });
+
+
 });

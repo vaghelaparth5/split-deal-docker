@@ -140,7 +140,6 @@ html, body{
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  justify-content: space-between;
 }
 
 .flex-row > div > label {
@@ -252,4 +251,8 @@ html, body{
 
 .social-btn:hover {
   background-color: #f3f4f6;
+}
+
+.hidden {
+  display: none;
 }

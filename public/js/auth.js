@@ -16,27 +16,21 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 console.log("the auth.js file is loaded", localStorage);
 
-// Toggle between login/signup forms
-if (toggleLink) {
-  toggleLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    isLogin = !isLogin;
-    
-    // Update form title
-    formTitle.textContent = isLogin ? "Sign In" : "Sign Up";
-    
-    // Update submit button text
-    submitBtn.textContent = isLogin ? "Sign In" : "Sign Up";
-    
-    // Toggle name and confirm password fields
-    nameField.style.display = isLogin ? "none" : "flex";
-    confirmField.style.display = isLogin ? "none" : "flex";
-    
-    // Update toggle text
-    toggleText.textContent = isLogin ? "Don't have an account?" : "Already have an account?";
-    toggleLink.textContent = isLogin ? "Sign Up" : "Sign In";
-  });
-}
+toggleLink.addEventListener("click", () => {
+  isLogin = !isLogin;
+
+  formTitle.textContent = isLogin ? "Sign In" : "Sign Up";
+  submitBtn.textContent = isLogin ? "Sign In" : "Sign Up";
+  toggleText.textContent = isLogin
+    ? "Don't have an account?"
+    : "Already have an account?";
+  toggleLink.textContent = isLogin ? "Sign Up" : "Sign In";
+
+  nameField.style.display = isLogin ? "none" : "block";
+  confirmField.style.display = isLogin ? "none" : "block";
+});
+
+
 
 const token = localStorage.authToken;
   if (token) {

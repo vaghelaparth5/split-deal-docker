@@ -81,10 +81,7 @@ window.onload = function () {
         };
     });
 
-    //  DISCONNECT
-    socket.on("disconnect", () => {
-        console.log(" Disconnected from server");
-    });
+    // deal expire
     socket.on("deal_expired", (data) => {
         console.log(" [EXPIRED] deal_expired received:", data);
 
@@ -119,5 +116,44 @@ window.onload = function () {
             clearTimeout(timer);
         };
     });
+    // ✅ Group Status Update Notification
+    socket.on("group-status-updated", (data) => {
+        console.log(" [GROUP] group-status-updated received:", data);
 
+        const popup = document.getElementById("group-notification");
+        const title = document.getElementById("group-title");
+        const members = document.getElementById("group-members");
+        const joinBtn = document.getElementById("join-group-btn");
+        const closeBtn = document.getElementById("close-group");
+
+        if (!popup || !title || !members || !joinBtn || !closeBtn) {
+            console.warn("❌ Group status toast DOM missing");
+            return;
+        }
+
+        title.textContent = `${data.title}`;
+        members.textContent = `Status changed to: ${data.newStatus}`;
+        joinBtn.style.display = "none"; // Hide join button if group is completed/expired
+
+        popup.classList.add("show");
+
+        const timer = setTimeout(() => {
+            popup.classList.remove("show");
+            joinBtn.style.display = "inline-block";
+        }, 7000);
+
+        closeBtn.onclick = () => {
+            popup.classList.remove("show");
+            joinBtn.style.display = "inline-block";
+            clearTimeout(timer);
+        };
+    });
+
+
+
+
+    //  DISCONNECT
+    socket.on("disconnect", () => {
+        console.log(" Disconnected from server");
+    });
 };

@@ -66,7 +66,7 @@
         </nav>
       </div>
 
-
+      <!--  Deal Notification -->
       <div id="deal-notification" class="deal-popup">
         <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
         <div class="deal-text">
@@ -80,7 +80,7 @@
     </div>
   </header>
 
-  <!-- 👥 Group Notification -->
+  <!--  Group Notification -->
   <div id="group-notification" class="group-popup">
     <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
     <div class="group-text">
@@ -91,6 +91,15 @@
     <button id="close-group" class="close-btn">x</button>
   </div>
 
+  <!--  Group Status Update Notification -->
+  <div id="group-status-notification" class="group-popup">
+    <img src="https://cdn-icons-png.flaticon.com/512/1146/1146893.png" alt="Group Status Icon" class="group-icon" />
+    <div class="group-text">
+      <strong id="status-group-title"></strong><br />
+      <span id="status-group-message"></span>
+    </div>
+    <button id="close-status-notification" class="close-btn">×</button>
+  </div>
 
   <!-- Hero Section -->
   <div class="sect sect--padding-top">
@@ -289,6 +298,8 @@
 
       <script type="application/javascript"></script>
 
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="/js/mainSocket.js"></script>
       <!-- <script src="/js/auth.js"></script> -->
       <script src="/socket.io/socket.io.js"></script>
       <script src="/js/mainSocket.js"></script>
