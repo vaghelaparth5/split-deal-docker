@@ -4,14 +4,14 @@ window.onload = function () {
 
     const socket = io(); // ONLY ONE socket instance
 
-    // ✅ CONNECTION
+    // CONNECTION
     socket.on("connect", () => {
-        console.log("✅ Connected to server:", socket.id);
+        console.log(" Connected to server:", socket.id);
     });
 
-    // ✅ DEAL NOTIFICATION
+    //  DEAL NOTIFICATION
     socket.on("new_deal", (data) => {
-        console.log("🔥 [DEAL] new_deal received:", data);
+        console.log(" [DEAL] new_deal received:", data);
 
         const popup = document.getElementById("deal-notification");
         const img = document.getElementById("deal-img");
@@ -22,7 +22,7 @@ window.onload = function () {
         const closeBtn = document.getElementById("close-notification");
 
         if (!popup || !img || !title || !price || !location || !viewBtn || !closeBtn) {
-            console.warn("❌ Deal toast DOM elements missing");
+            console.warn(" Deal toast DOM elements missing");
             return;
         }
 
@@ -30,7 +30,7 @@ window.onload = function () {
         img.src = data.deal.image_url || "https://via.placeholder.com/60"; // fallback
         title.textContent = data.deal.title;
         price.textContent = `₹${data.deal.price} (was ₹${data.deal.original_price})`;
-        location.textContent = data.deal.location ? `📍 ${data.deal.location}` : "";
+        location.textContent = data.deal.location ? ` ${data.deal.location}` : "";
         viewBtn.href = `/views/dealsDetails.html?id=${data.deal._id}`;
 
         popup.classList.add("show");
@@ -46,9 +46,9 @@ window.onload = function () {
     });
 
 
-    // ✅ GROUP NOTIFICATION
+    //  GROUP NOTIFICATION
     socket.on("new_group", (data) => {
-        console.log("📥 [GROUP] new_group received:", data);
+        console.log(" [GROUP] new_group received:", data);
 
         const popup = document.getElementById("group-notification");
         const title = document.getElementById("group-title");
@@ -57,7 +57,7 @@ window.onload = function () {
         const closeBtn = document.getElementById("close-group");
 
         if (!popup || !title || !members || !joinBtn || !closeBtn) {
-            console.warn("❌ Group DOM elements not found");
+            console.warn(" Group DOM elements not found");
             return;
         }
 
@@ -77,8 +77,43 @@ window.onload = function () {
         };
     });
 
-    // ✅ DISCONNECT
+    //  DISCONNECT
     socket.on("disconnect", () => {
-        console.log("❌ Disconnected from server");
+        console.log(" Disconnected from server");
     });
+    socket.on("deal_expired", (data) => {
+        console.log(" [EXPIRED] deal_expired received:", data);
+
+        const popup = document.getElementById("deal-notification");
+        const img = document.getElementById("deal-img");
+        const title = document.getElementById("deal-title");
+        const price = document.getElementById("deal-price");
+        const location = document.getElementById("deal-location");
+        const viewBtn = document.getElementById("view-deal-btn");
+        const closeBtn = document.getElementById("close-notification");
+
+        if (!popup || !img || !title || !price || !location || !viewBtn || !closeBtn) {
+            console.warn("Deal DOM elements missing");
+            return;
+        }
+
+        img.src = data.deal.image_url || "https://via.placeholder.com/60";
+        title.textContent = `Expired: ${data.deal.title}`;
+        price.textContent = "";
+        location.textContent = `Deadline was: ${new Date(data.deal.deadline).toLocaleString()}`;
+        viewBtn.href = `/views/dealsDetails.html?id=${data.deal._id}`;
+        viewBtn.textContent = "View Details";
+
+        popup.classList.add("show");
+
+        const timer = setTimeout(() => {
+            popup.classList.remove("show");
+        }, 7000);
+
+        closeBtn.onclick = () => {
+            popup.classList.remove("show");
+            clearTimeout(timer);
+        };
+    });
+
 };
