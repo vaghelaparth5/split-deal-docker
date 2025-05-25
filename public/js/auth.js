@@ -16,6 +16,22 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 console.log("the auth.js file is loaded", localStorage);
 
+toggleLink.addEventListener("click", () => {
+  isLogin = !isLogin;
+
+  formTitle.textContent = isLogin ? "Sign In" : "Sign Up";
+  submitBtn.textContent = isLogin ? "Sign In" : "Sign Up";
+  toggleText.textContent = isLogin
+    ? "Don't have an account?"
+    : "Already have an account?";
+  toggleLink.textContent = isLogin ? "Sign Up" : "Sign In";
+
+  nameField.style.display = isLogin ? "none" : "block";
+  confirmField.style.display = isLogin ? "none" : "block";
+});
+
+
+
 const token = localStorage.authToken;
   if (token) {
     showProfileUI('P');
