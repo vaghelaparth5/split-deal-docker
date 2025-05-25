@@ -1,4 +1,21 @@
 // You can add this to your existing JavaScript file
+const loginMenuItem = document.getElementById("loginMenuItem");
+const profileMenu = document.getElementById("profileMenu");
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+const logoutBtn = document.getElementById("logoutBtn");
+
+const token = localStorage.authToken;
+  if (token) {
+    showProfileUI('P');
+  }
+
+  function showProfileUI(name = "U") {
+  loginMenuItem.style.display = "none";
+  profileMenu.style.display = "inline-block";
+  profileIcon.textContent = name[0].toUpperCase();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Current year for copyright
   const yearSpan = document.querySelector('.footer-bottom p');
