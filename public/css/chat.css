@@ -51,7 +51,7 @@ html, body{
 }
 
 .header__light{
-  color: orange;
+  color: #FF6B00;
 }
 .header__link{
   color: #1f4568;
@@ -63,7 +63,7 @@ html, body{
   color:#3a9fff;
 }
 .navbar-toggle .icon-bar{
-  background-color: orange;
+  background-color: #FF6B00;
 }
 .navbar-toggle {
     margin: 5px 0;
@@ -234,7 +234,6 @@ html, body{
   
   .footer-link {
     color: #2563eb;
-    text-decoration: underline;
     font-weight: 500;
   }
   

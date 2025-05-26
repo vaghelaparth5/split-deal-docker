@@ -1,3 +1,6 @@
+console.log("mainSocket.js loaded");
+
+
 
 window.onload = function () {
     console.log("working");
@@ -11,6 +14,7 @@ window.onload = function () {
 
     //  DEAL NOTIFICATION
     socket.on("new_deal", (data) => {
+        console
         console.log(" [DEAL] new_deal received:", data);
 
         const popup = document.getElementById("deal-notification");
@@ -112,7 +116,8 @@ window.onload = function () {
             clearTimeout(timer);
         };
     });
-    // ✅ Group Status Update Notification
+    
+    // Group Status Update Notification
     socket.on("group-status-updated", (data) => {
         console.log(" [GROUP] group-status-updated received:", data);
 
@@ -123,7 +128,7 @@ window.onload = function () {
         const closeBtn = document.getElementById("close-group");
 
         if (!popup || !title || !members || !joinBtn || !closeBtn) {
-            console.warn("❌ Group status toast DOM missing");
+            console.warn(" Group status toast DOM missing");
             return;
         }
 
