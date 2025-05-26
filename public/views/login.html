@@ -60,7 +60,9 @@
           <ul class="header__elenco">
             <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
             <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
-            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el">
+              <a href="/views/aboutus.html" class="header__link">About Us</a>
+            </li>
             <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
             <li class="header__el" id="profileMenu" style="display: none;">
               <div class="profile-container">
@@ -144,7 +146,7 @@
   <script src="/js/auth.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/mainSocket.js"></script>
-  <!-- <script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toggleLink = document.getElementById('toggleLink');
       const toggleText = document.getElementById('toggleText');
@@ -208,7 +210,7 @@
         console.log('Form submitted');
       });
     });
-  </script> -->
+  </script>
   
   
 </body>
