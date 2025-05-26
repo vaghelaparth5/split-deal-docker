@@ -52,3 +52,17 @@ npm run test
 To run Cypress 
 npx cypress open
 
+## How to build the docker image : 
+docker build --no-cache -t splitdeal-app .
+
+## How to run the container : 
+docker run -p 5010:3000 --env-file .env splitdeal-app
+
+## Docker Access Port : 
+http://localhost:5010/api/student
+http://localhost:5010
+
+## The API Output : 
+{"name":"Parth Vaghela","studentId":"225139485"}
+
+
