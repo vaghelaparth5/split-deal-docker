@@ -227,6 +227,8 @@ async function fetchDeals() {
     const response = await fetch("http://localhost:3000/api/deal/get");
     const data = await response.json();
     deals = data.deals || [];
+    // Populate the brand filter dropdown dynamically
+    populateBrandFilter();
     applyFilters(); // Apply current filters after fetching
   } catch (error) {
     console.error("Failed to fetch deals:", error);
@@ -234,6 +236,40 @@ async function fetchDeals() {
       dealGrid.innerHTML = "<p>Error loading deals.</p>";
     }
   }
+}
+
+function populateBrandFilter() {
+  if (!brandFilter) return;
+
+  // Get all unique first words from deal titles
+  const uniqueBrands = new Set();
+  
+  deals.forEach(deal => {
+    if (deal.title) {
+      // Get the first word of the title
+      const firstWord = deal.title.trim().split(/\s+/)[0];
+      if (firstWord) {
+        uniqueBrands.add(firstWord);
+      }
+    }
+    
+    // Also include the brand if it exists in the deal object
+    if (deal.brand) {
+      uniqueBrands.add(deal.brand);
+    }
+  });
+
+  // Clear existing options except the first one ("All Brands")
+  brandFilter.innerHTML = '<option value="All">All Brands</option>';
+  
+  // Add new options sorted alphabetically
+  const sortedBrands = Array.from(uniqueBrands).sort();
+  sortedBrands.forEach(brand => {
+    const option = document.createElement('option');
+    option.value = brand;
+    option.textContent = brand;
+    brandFilter.appendChild(option);
+  });
 }
 
 // Initialize event listeners
