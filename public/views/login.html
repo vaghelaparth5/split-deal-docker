@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Authentication</title>
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <style>
     .profile-container {
       position: relative;
@@ -52,13 +53,14 @@
   <header class="header">
     <div class="container header__container">
       <div class="header__logo">
-        <img class="header__img" src="./images/split-deal-logo.png" height="40" width="170" />
+        <img class="header__img" src="/images/split-deal-logo.png" height="40" width="170" />
         <h1 class="header__title"></h1>
       </div>
       <div class="header__menu">
         <nav id="navbar" class="header__nav collapse">
           <ul class="header__elenco">
             <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/grouplisting.html" class="header__link">Groups</a></li>
             <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
             <li class="header__el"><a href="#" class="header__link">About Us</a></li>
             <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
@@ -122,19 +124,52 @@
         <span id="toggleText">Don't have an account?</span>
         <span class="span" id="toggleLink">Sign Up</span>
       </p>
+      <div id="errorMessage" style="color: red; display: none;"></div>
+
     </form>
   </div>
-    <!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-container">
-    <div>
-      <a href="#" class="brand" aria-label="Brand">SplitDeal</a>
+  <!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>SplitDeal</h3>
+      <p>We're part of the <strong>Deakin Uni</strong> family</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="social-icon">f</i></a>
+        <a href="#" aria-label="Twitter"><i class="social-icon">t</i></a>
+        <a href="#" aria-label="Instagram"><i class="social-icon">ig</i></a>
+        <a href="#" aria-label="LinkedIn"><i class="social-icon">in</i></a>
+      </div>
     </div>
-
-    <div class="footer-text">
-      <p>We're part of the <a href="#" class="footer-link">Deakin Uni</a> family.</p>
-      <p>© 2025 IT Labs.</p>
+    
+    <div class="footer-links">
+      <div class="links-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      
+      <div class="links-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 IT Labs. All rights reserved.</p>
+  </div>
+</footer>
+<!-- ========== END FOOTER ========== -->
 
    
   </div>
@@ -142,6 +177,73 @@
   <script src="/js/auth.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/mainSocket.js"></script>
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleLink = document.getElementById('toggleLink');
+      const toggleText = document.getElementById('toggleText');
+      const formTitle = document.getElementById('formTitle');
+      const nameField = document.getElementById('nameField');
+      const confirmField = document.getElementById('confirmField');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMessage = document.getElementById('errorMessage');
+  
+      let isSignIn = true;
+  
+      toggleLink.addEventListener('click', () => {
+        isSignIn = !isSignIn;
+  
+        if (isSignIn) {
+          formTitle.textContent = 'Sign In';
+          nameField.style.display = 'none';
+          confirmField.style.display = 'none';
+          submitBtn.textContent = 'Sign In';
+          toggleText.textContent = "Don't have an account?";
+          toggleLink.textContent = 'Sign Up';
+        } else {
+          formTitle.textContent = 'Sign Up';
+          nameField.style.display = 'block';
+          confirmField.style.display = 'block';
+          submitBtn.textContent = 'Sign Up';
+          toggleText.textContent = 'Already have an account?';
+          toggleLink.textContent = 'Sign In';
+        }
+  
+        // Clear error message on toggle
+        errorMessage.style.display = 'none';
+        errorMessage.textContent = '';
+      });
+  
+      submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+  
+        const nameInput = document.getElementById('name');
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value.trim() : '';
+  
+        errorMessage.style.display = 'none';
+        errorMessage.textContent = '';
+  
+        if (!email || !password || (!isSignIn && (!nameInput.value.trim() || !confirmPassword))) {
+          errorMessage.textContent = 'Please enter all required fields.';
+          errorMessage.style.display = 'block';
+          return;
+        }
+  
+        if (!isSignIn && password !== confirmPassword) {
+          errorMessage.textContent = 'Passwords do not match.';
+          errorMessage.style.display = 'block';
+          return;
+        }
+  
+        // Submit logic goes here (fetch/axios/etc.)
+        console.log('Form submitted');
+      });
+    });
+  </script> -->
+  
+  
 </body>
 
 </html>

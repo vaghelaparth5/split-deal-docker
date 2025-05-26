@@ -5,23 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SplitDeal | Group Deals</title>
   <link rel="stylesheet" href="../css/grouplisting.css" />
+  <!-- <link rel="stylesheet" href="../css/styles.css" /> -->
 
 </head>
 <body>
-  <!-- ✅ SplitDeal Header with Navigation + Filters -->
+
+
+  <!-- SplitDeal Header with Navigation + Filters -->
   <header class="header">
-    <div class="header__container">
+    <div class="container header__container">
       <div class="header__logo">
-        <img src="/images/split-deal-logo.png" alt="SplitDeal Logo" height="40" width="170" />
+        <a href="/index.html">
+        <img class="header__img" src="../images/split-deal-logo.png" height="40" width="170">
+        <h1 class="header__title"></h1>
+        </a>
       </div>
-      <nav class="header__nav">
-        <ul class="header__menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="dealsDetails.html">Deals</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="/views/login.html">Login</a></li>
-        </ul>
-      </nav>
+      <div class="header__menu">
+        <nav id="navbar" class="header__nav collapse">
+          <ul class="header__elenco">
+            <li class="header__el"><a href="/index.html" class="header__link">Home</a></li>
+            <li class="header__el"><a href="/views/grouplisting.html" class="header__link">Groups</a></li>
+            <li class="header__el"><a href="/views/dealsDetails.html" class="header__link">Deals</a></li>
+            <li class="header__el"><a href="#" class="header__link">About Us</a></li>
+            <li class="header__el" id="loginMenuItem"><a href="/views/login.html" class="header__link">Login</a></li>
+            <li class="header__el" id="profileMenu" style="display: none;">
+              <div class="profile-container">
+                <div id="profileIcon" class="profile-icon">U</div>
+                <div class="dropdown" id="profileDropdown">
+                  <a href="/views/profilepage.html">Profile</a>
+                  <a href="#" id="logoutBtn">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    
     </div>
 
     <!-- 🔍 Search & Filters -->
@@ -51,7 +70,7 @@
   </div>
 
   <!-- 🛍️ Deal Notification -->
-  <div id="deal-notification" class="deal-popup hidden">
+  <!-- <div id="deal-notification" class="deal-popup hidden">
     <img id="deal-img" src="" alt="Deal Image" class="deal-img" />
     <div class="deal-text">
       <strong id="deal-title"></strong><br />
@@ -60,10 +79,10 @@
       <a id="view-deal-btn" class="view-deal-btn" href="#">View Deal</a>
     </div>
     <button id="close-notification" class="close-btn">×</button>
-  </div>
+  </div> -->
 
   <!-- 👥 Group Notification -->
-  <div id="group-notification" class="group-popup hidden">
+  <!-- <div id="group-notification" class="group-popup hidden">
     <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="Group Icon" class="group-icon" />
     <div class="group-text">
       <strong id="group-title"></strong><br />
@@ -71,7 +90,7 @@
       <a id="join-group-btn" class="join-group-btn" href="#">Join Group</a>
     </div>
     <button id="close-group" class="close-btn">×</button>
-  </div>
+  </div> -->
     
   <!-- ========== FOOTER ========== -->
 <footer class="site-footer">

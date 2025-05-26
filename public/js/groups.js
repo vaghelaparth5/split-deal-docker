@@ -1,3 +1,37 @@
+const loginMenuItem = document.getElementById("loginMenuItem");
+const profileMenu = document.getElementById("profileMenu");
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+const logoutBtn = document.getElementById("logoutBtn");
+
+const token = localStorage.authToken;
+  if (token) {
+    showProfileUI('P');
+  }
+
+  function showProfileUI(name = "U") {
+  loginMenuItem.style.display = "none";
+  profileMenu.style.display = "inline-block";
+  profileIcon.textContent = name[0].toUpperCase();
+}
+
+// Show/hide dropdown
+if (profileIcon) {
+  profileIcon.addEventListener("click", () => {
+    profileDropdown.style.display =
+      profileDropdown.style.display === "block" ? "none" : "block";
+  });
+}
+
+// Logout functionality
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userName");
+    window.location.href = "/views/login.html";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("group-grid");
   const modal = document.getElementById("modal");

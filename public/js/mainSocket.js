@@ -1,3 +1,6 @@
+console.log("mainSocket.js loaded");
+
+
 
 window.onload = function () {
     console.log("working");
@@ -11,6 +14,7 @@ window.onload = function () {
 
     //  DEAL NOTIFICATION
     socket.on("new_deal", (data) => {
+        console
         console.log(" [DEAL] new_deal received:", data);
 
         const popup = document.getElementById("deal-notification");
