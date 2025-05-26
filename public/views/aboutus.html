@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Feature Cards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+/*menu header*/
+.header{
+    padding: 30px 25px;
+  }
+  .header__elenco {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
+  .header__menu {
+      float: right;
+  }
+  .header__el{
+      padding: 0 25px;
+      display: inline-block;
+  }
+  .header__img{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .header__logo, .header__menu{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .header__title{
+    font-size: 18px;
+    margin: 0;
+    margin-left: 10px;
+    display: inline-block;
+    line-height: 18px;
+    vertical-align: middle;
+  }
+  
+  .header__light{
+    color: #FF6B00;
+  }
+  .header__link{
+    color: #1f4568;
+    font-size: 14px;
+  
+  }
+  .header__link:hover{
+    text-decoration: none;
+    color:#3a9fff;
+  }
+  .navbar-toggle .icon-bar{
+    background-color: #FF6B00;
+  }
+  .navbar-toggle {
+      margin: 5px 0;
+  }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 16px;
+        }
+        
+        .header p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 30px;
+            background: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: orange;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #222;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .btn {
+            display: block;
+            margin: 50px auto 0;
+            padding: 12px 32px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #4338ca;
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 1.75rem;
+            }
+        }
+        .hero-section {
+  padding: 6rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 960px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-image {
+  width: 83%;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.content h1 {
+  font-size: 2rem;
+  color: #1f2937; /* text-gray-900 */
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.content p {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background-color: orange; /* indigo-500 */
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #f4920a; /* indigo-600 */
+}
+
+.btn-secondary {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #374151; /* gray-700 */
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb; /* gray-200 */
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        
+        <div class="header__menu">
+            
+          <nav id="navbar" class="header__nav collapse">
+            <ul class="header__elenco">
+              <li class="header__el">
+                <a href="/index.html" class="header__link">Home</a>
+              </li>
+              <li class="header__el"><a href="/views/grouplisting.html" class="header__link">Groups</a></li>
+              <li class="header__el">
+                <a href="/views/dealsDetails.html" class="header__link">Deals</a>
+              </li>
+              <li class="header__el">
+                <a href="#" class="header__link">About Us</a>
+              </li>
+              <li class="header__el" id="loginMenuItem">
+                <a href="/views/login.html" class="header__link">Login</a>
+              </li>
+              <li class="header__el" id="profileMenu" style="display: none">
+                <div class="profile-container">
+                  <div id="profileIcon" class="profile-icon">U</div>
+                  <div class="dropdown" id="profileDropdown">
+                    <a href="/views/profilepage.html">Profile</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+
+    
+      <section class="hero-section">
+        <div class="container">
+          <img class="hero-image" src="/images/mockup.jpg" alt="hero">
+          <div class="content">
+            <h1>Split Bills. Save Friendships.</h1>
+            <p>
+              With <strong>SplitDeal</strong>, sharing group expenses has never been easier. Whether it's rent, dinners, or weekend trips—
+              we help you track, split, and settle up with zero awkwardness. Invite friends, split costs fairly, and stay organized.
+            </p>
+            <div class="button-group">
+              <button class="btn-primary">Get Started</button>
+              <button class="btn-secondary">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+
+
+    <section>
+        <div class="container">
+          <div class="header">
+            <h1>Welcome to SplitDeal</h1>
+            <p>Simplify bill splitting, group expenses, and shared deals effortlessly with your friends, family, or roommates.</p>
+          </div>
+      
+          <div class="features">
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <h2>Split Bills Instantly</h2>
+              <p>Enter expenses and SplitDeal calculates who owes what — no more confusion or spreadsheets.</p>
+            </div>
+      
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="6" cy="6" r="3"></circle>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+                </svg>
+              </div>
+              <h2>Track Shared Deals</h2>
+              <p>Manage subscriptions, groceries, and other recurring expenses among groups with ease.</p>
+            </div>
+      
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <h2>Invite Friends</h2>
+              <p>Send invites via link or email to start sharing and managing expenses together in seconds.</p>
+            </div>
+      
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
+                </svg>
+              </div>
+              <h2>Automated Reminders</h2>
+              <p>Never forget to settle up. Get smart reminders when someone owes you or when it’s time to pay.</p>
+            </div>
+      
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                </svg>
+              </div>
+              <h2>Insightful Reports</h2>
+              <p>Visualize your group spending patterns with easy-to-understand charts and summaries.</p>
+            </div>
+      
+            <div class="feature-card">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <h2>Secure & Reliable</h2>
+              <p>Your data is safe with end-to-end encryption and cloud backup — privacy guaranteed.</p>
+            </div>
+          </div>
+      
+          <button class="btn">Start Splitting Now</button>
+        </div>
+      </section>
+
+      
+</body>
+</html>

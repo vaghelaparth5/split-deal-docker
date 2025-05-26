@@ -61,7 +61,7 @@
               <a href="/views/dealsDetails.html" class="header__link">Deals</a>
             </li>
             <li class="header__el">
-              <a href="#" class="header__link">About Us</a>
+              <a href="/views/aboutus.html" class="header__link">About Us</a>
             </li>
             <li class="header__el" id="loginMenuItem">
               <a href="/views/login.html" class="header__link">Login</a>
@@ -86,7 +86,7 @@
       <div class="profile-card">
         <div class="profile-banner"></div>
         <div class="profile-avatar"></div>
-        <h2 class="profile-name">Joseph K Saji</h2>
+        <h2 class="profile-name" id="profileName">User</h2>
         <p class="profile-bio">Passionate about crafting scalable web applications and seamless user experiences.</p>
         <div class="profile-actions">
         </div>
@@ -212,8 +212,28 @@
 <!-- ========== END FOOTER ========== -->
   <script src="/js/profile.js"></script>
   <script src="/js/auth.js"></script>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/mainSocket.js"></script>
+  <script>
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Activate button
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Show panel
+    const tab = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.id === tab 
+        ? panel.classList.remove('hidden') 
+        : panel.classList.add('hidden');
+    });
+  });
+});
+
+  </script>
 </body>
 
 </html>

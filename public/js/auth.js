@@ -1,5 +1,6 @@
-// auth.js
+// auth.js - Complete Debugged Version
 
+// DOM Elements
 const authForm = document.getElementById("authForm");
 const formTitle = document.getElementById("formTitle");
 const toggleLink = document.getElementById("toggleLink");
@@ -14,32 +15,23 @@ const profileIcon = document.getElementById("profileIcon");
 const profileDropdown = document.getElementById("profileDropdown");
 const logoutBtn = document.getElementById("logoutBtn");
 
-console.log("the auth.js file is loaded", localStorage);
+console.log("[DEBUG] Auth.js initialized. Checking localStorage...");
 
+// Toggle between login/signup
+let isLogin = true;
 toggleLink.addEventListener("click", () => {
   isLogin = !isLogin;
-
   formTitle.textContent = isLogin ? "Sign In" : "Sign Up";
   submitBtn.textContent = isLogin ? "Sign In" : "Sign Up";
-  toggleText.textContent = isLogin
-    ? "Don't have an account?"
+  toggleText.textContent = isLogin 
+    ? "Don't have an account?" 
     : "Already have an account?";
   toggleLink.textContent = isLogin ? "Sign Up" : "Sign In";
-
   nameField.style.display = isLogin ? "none" : "block";
   confirmField.style.display = isLogin ? "none" : "block";
 });
 
-
-
-const token = localStorage.authToken;
-  if (token) {
-    showProfileUI('P');
-  }
-
-let isLogin = true;
-
-// Show/hide dropdown
+// Profile dropdown toggle
 if (profileIcon) {
   profileIcon.addEventListener("click", () => {
     profileDropdown.style.display =
@@ -50,14 +42,17 @@ if (profileIcon) {
 // Logout functionality
 if (logoutBtn) {
   logoutBtn.addEventListener("click", () => {
+    console.log("[DEBUG] Logging out. Clearing localStorage...");
     localStorage.removeItem("authToken");
     localStorage.removeItem("userName");
     window.location.href = "/views/login.html";
   });
 }
 
+// Form submission handler
 authForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("[DEBUG] Form submitted. Mode:", isLogin ? "Login" : "Register");
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -81,43 +76,56 @@ authForm.addEventListener("submit", async (e) => {
     : "http://localhost:3000/api/auth/register";
 
   submitBtn.disabled = true;
-  submitBtn.textContent = isLogin ? "Signing In…" : "Signing Up…";
+  submitBtn.textContent = isLogin ? "Signing In..." : "Signing Up...";
 
   try {
+    console.log("[DEBUG] Sending request to:", url);
+    console.log("[DEBUG] Payload:", payload);
+
     const res = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
 
     const data = await res.json();
+    console.log("[DEBUG] Server response:", data);
 
-    if (!res.ok) throw new Error(data.error || "Unknown error");
+    if (!res.ok) {
+      throw new Error(data.error || "Unknown error occurred");
+    }
 
-    alert(data.message || "Success!");
-
-    // Store token & user name
+    // Store authentication data
     if (data.token) {
       localStorage.setItem("authToken", data.token);
+      console.log("[DEBUG] Auth token stored in localStorage");
+    } else {
+      console.warn("[DEBUG] No token received in response");
     }
-    if (data.user_name) {
-      localStorage.setItem("userName", data.user_name);
+
+    // Handle username - checking multiple possible response fields
+    const receivedUsername = data.user_name || data.username || data.name;
+    if (receivedUsername) {
+      localStorage.setItem("userName", receivedUsername);
+      console.log("[DEBUG] Username stored:", receivedUsername);
+    } else {
+      console.warn("[DEBUG] No username received in response. Available fields:", Object.keys(data));
     }
 
-    console.log(localStorage, "hello, this is local storage");
+    // Display success and update UI
+    alert(data.message || (isLogin ? "Login successful!" : "Registration successful!"));
+    showProfileUI(receivedUsername || name || "U");
 
-    showProfileUI(data.user_name || name || "U" || data.token);
+    // Redirect or reset form
+    if (isLogin) {
+      window.location.href = "/index.html";
+    } else {
+      authForm.reset();
+      toggleLink.click(); // Switch back to login view
+    }
 
-    // Redirect to landing page
-    // window.location.href = "/index.html";
-
-    authForm.reset();
-    if (!isLogin) toggleLink.click();
-    console.log("Form submitted successfully");
   } catch (err) {
-    console.error(err);
+    console.error("[ERROR] Authentication failed:", err);
     alert(`Error: ${err.message}`);
   } finally {
     submitBtn.disabled = false;
@@ -125,19 +133,32 @@ authForm.addEventListener("submit", async (e) => {
   }
 });
 
+// UI Update Function
 function showProfileUI(name = "U") {
-  loginMenuItem.style.display = "none";
-  profileMenu.style.display = "inline-block";
-  profileIcon.textContent = name[0].toUpperCase();
+  console.log("[DEBUG] Updating UI for user:", name);
+  if (loginMenuItem) loginMenuItem.style.display = "none";
+  if (profileMenu) profileMenu.style.display = "inline-block";
+  if (profileIcon) {
+    const displayChar = name[0]?.toUpperCase() || "U";
+    profileIcon.textContent = displayChar;
+    console.log("[DEBUG] Profile icon set to:", displayChar);
+  }
 }
 
-
-// On page load
-() => (function () {
+// Initial Auth Check
+(function initAuthCheck() {
+  console.log("[DEBUG] Running initial auth check...");
   const token = localStorage.getItem("authToken");
   const userName = localStorage.getItem("userName");
-  console.log(toke, userName, "this is the token and user name");
+
+  console.log("[DEBUG] Retrieved from localStorage:", { token, userName });
+
   if (token && userName) {
+    console.log("[DEBUG] Valid session found for user:", userName);
     showProfileUI(userName);
+  } else {
+    console.log("[DEBUG] No active session found");
+    if (token) console.warn("[DEBUG] Token exists but no username");
+    if (userName) console.warn("[DEBUG] Username exists but no token");
   }
 })();
