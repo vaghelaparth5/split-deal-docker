@@ -17,7 +17,8 @@ const DealSchema = new mongoose.Schema({
   image_url: { type: String, default: "" },
   // Ratings and feedback for deal quality
   average_rating: { type: Number, default: 0 },
-  number_of_ratings: { type: Number, default: 0 }
+  number_of_ratings: { type: Number, default: 0 },
+  whatapp_link:{type:String, default:""}
 });
   
 module.exports = mongoose.model("Deal", DealSchema);
