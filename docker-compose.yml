@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_FROM=${SMTP_FROM}
+      - FRONTEND_URL=${FRONTEND_URL}
+    restart: unless-stopped
+  
+  # Cypress testing
+  cypress:
+    image: cypress/included:12.0.0
+    depends_on:
+      - app
+    volumes:
+      - ./:/e2e
+    working_dir: /e2e
+    environment:
+      - CYPRESS_BASE_URL=http://app:3000
+    command: ["cypress", "run"]

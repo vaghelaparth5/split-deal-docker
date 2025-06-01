@@ -6,7 +6,7 @@ body {
 }
 
 /*menu header*/
-.header {
+/* .header {
   padding: 30px 25px;
 }
 .header__elenco {
@@ -50,7 +50,7 @@ body {
 .header__link:hover {
   text-decoration: none;
   color: #3a9fff;
-}
+} */
 
 .profile-container {
   position: relative;
