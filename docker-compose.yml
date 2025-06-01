@@ -4,10 +4,11 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "3000:3001" 
     environment:
-      - MONGODB_URI=${MONGODB_URI}
-      - PORT=${PORT}
+      - DOCKER_ENV=local  
+      - MONGODB_URI=mongodb://mongodb:27017/project-splitdeal
+      - PORT=3000  
       - JWT_SECRET=${JWT_SECRET}
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT}
@@ -15,16 +16,32 @@ services:
       - SMTP_PASS=${SMTP_PASS}
       - SMTP_FROM=${SMTP_FROM}
       - FRONTEND_URL=${FRONTEND_URL}
-    restart: unless-stopped
-  
-  # Cypress testing
-  cypress:
-    image: cypress/included:12.0.0
     depends_on:
-      - app
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - splitdeal-network
+
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
     volumes:
-      - ./:/e2e
-    working_dir: /e2e
+      - mongodb_data:/data/db
     environment:
-      - CYPRESS_BASE_URL=http://app:3000
-    command: ["cypress", "run"]
+      - MONGO_INITDB_DATABASE=project-splitdeal
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - splitdeal-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  splitdeal-network:
+    driver: bridge
